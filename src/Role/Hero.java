@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Utils.EventComUtil;
+
 public class Hero {
 
 	private int x_index;
 	private int y_index;
 	private String name;
 	private boolean alive_yn;
+	private int max_life;
 	private int life;
 	private int magic;
 	private int atk;
+	private int weapon_atk;
 	private int def;
 	private int ats;
 	private int res;
 	private int exp;
+	private int money;
 	private int dex;
 	private int level;
 	private double crit;//爆擊率
+	
 	
 	
 	@Override
@@ -34,16 +40,47 @@ public class Hero {
 		this.y_index=1;
 		this.name = name;
 		this.alive_yn=true;
-		this.life = 50;
-		this.magic = 50;
+		this.max_life = 30;
+		this.life = 30;
+		this.magic = 30;
 		this.atk = 10;
-		this.def = 10;
-		this.ats = 10;
-		this.res = 10;
+		this.weapon_atk=0;
+		this.def = 5;
+		this.ats = 5;
+		this.res = 5;
 		this.dex = 10;
 		this.crit = 0.1;
 		this.level=1;
 		this.exp=0;
+		this.money = 0;
+	}
+	
+	
+	
+	public void getEventEffect(int good_or_bad,int value,int event_type) {
+		int final_value = (good_or_bad*value);		
+		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量
+			case 1:
+				this.money+=final_value;
+				System.out.println(this.name+"的金錢變化量:"+final_value);
+				break;
+			case 2:
+				this.atk+=final_value;
+				System.out.println(this.name+"的ATK變化量:"+final_value);
+				break;
+			case 3:
+				this.def+=final_value;
+				System.out.println(this.name+"的DEF變化量:"+final_value);
+				break;
+			case 4:
+				this.def+=final_value;
+				System.out.println(this.name+"的DEX變化量:"+final_value);
+				break;
+			case 5:
+				this.life+=final_value;
+				System.out.println(this.name+"的血量變化量:"+final_value);
+				break;
+		}
 	}
 	
 	public void move() {
@@ -97,7 +134,8 @@ public class Hero {
 		if(this.exp>5) {
 			this.level+=1;
 			this.exp=0;
-			this.life++;
+			this.max_life+=5;
+			this.life=this.max_life;
 			this.magic++;
 			this.atk++;
 			this.def++;
@@ -114,10 +152,10 @@ public class Hero {
 		boolean crit_yn = Math.random()>1-this.crit;
 		if(crit_yn==true) {
 			System.out.println(this.name+"使出了憤怒一擊!");
-			return (int) (this.atk*1.5);//發生了爆擊
+			return (int) ((this.atk+weapon_atk)*(0.35+Math.random())*1.5);//發生了爆擊
 		}
 		else {
-			return this.atk;
+			return (int) ((this.atk+this.weapon_atk)*(0.35+Math.random()));
 		}
 	}
 	

@@ -7,11 +7,26 @@ public class FightUtil {
 	public FightUtil() {}
 	
 	public void fight(Hero hero,Monster monster) {
-		while(hero.isAlive_yn()&&monster.getAliveYN()) {			
+		while(hero.isAlive_yn()&&monster.getAliveYN()) {
+			try {
+				Thread.sleep(1200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if(is_hero_attack(hero.getDex(),monster.getDex())) {//英雄攻擊
+				System.out.println(hero.getName()+"用力的揍了"+monster.getName());
 				monster.hurt(hero);
+				if(!monster.getAliveYN()) {
+				hero.getExperience(monster.getExp());
+				break;
+			}
 			}else {//怪物攻擊
+				System.out.println(hero.getName()+"被"+monster.getName()+"打得滿地打滾");
 				hero.hurt(monster.attack());
+				if(!hero.isAlive_yn()) {
+					break;
+				}
 			}
 					
 					
@@ -28,11 +43,11 @@ public class FightUtil {
 				return false;
 			}					
 		}
-		int mom = hero_dex+monster_dex;
-		int son = hero_dex;
+		double mom = hero_dex+monster_dex;
+		double son = hero_dex;
 		double hero_attack_ratio=son/mom;
-		
 		if(Math.random()<hero_attack_ratio) {
+			
 			return true;
 		}else {
 			return false;

@@ -1,16 +1,18 @@
 package monsters;
 
-public class EvilPig extends Monster{
+public class EvilDog extends Monster{
 
-	public EvilPig() {
+	public EvilDog() {
 		super();
-		this.monster_name="EvilPig";
+		this.monster_name="兇惡的野狗";
 		this.alive_yn=true;
 		this.life = 10;
-		this.atk = 5;
+		this.atk = 9;
 		this.def = 3;
-		this.dex = 1;
-		this.exp = 5;
+		this.dex = 3;
+		this.exp = 3;
+		this.crit = 0.05;
+		this.atk_style="瘋狗亂咬";
 	}
 
 }

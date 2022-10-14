@@ -14,13 +14,23 @@ public abstract class Monster {
 	protected int ats;
 	protected int res;
 	protected int exp;
+	protected String atk_style;
+	protected double crit;
 	
 	//public abstract int magic_atk(); 
 	
 	
 	
 	public int attack() {
-		return this.atk;
+		boolean crit_yn = Math.random()>1-this.crit;
+		if(crit_yn==true) {
+			System.out.println(this.monster_name+"使出了憤怒一擊");
+			return (int) ((this.atk)*(0.35+Math.random())*1.5);//發生了爆擊
+		}
+		else {
+			System.out.println(this.monster_name+"使出"+this.atk_style);
+			return (int) ((this.atk)*(0.35+Math.random()));
+		}
 	}
 	
 
@@ -31,7 +41,7 @@ public abstract class Monster {
 				+ res + ",敏捷力：" + dex ;
 	}
 	public int hurt(Hero hero) {
-		int damage = Math.max(hero.getAtk()-this.def,0);
+		int damage = Math.max(hero.attack()-this.def,0);
 		this.life = this.life-damage;		
 		if(this.life<=0) {			
 			this.alive_yn=false;
