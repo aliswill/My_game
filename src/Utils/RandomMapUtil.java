@@ -10,6 +10,7 @@ import java.util.Map;
 import Role.Hero;
 import map.MyMap;
 import map.Town;
+import monsters.Monster;
 
 
 
@@ -44,9 +45,25 @@ public class RandomMapUtil {
 		
 	}
 	
+	public Monster getMapMonster(Hero hero) {//已經遭遇怪物才要調用，在主程式調用		
+			cur_map = my_map[hero.getX_index()][hero.getY_index()];
+			cur_map.rebuild();
+			int map_monster_num = cur_map.getMonster_num();
+			double v = Math.random()*100;
+			int monster_index = (int)v/(int)(100/map_monster_num);
+			Monster monster = cur_map.getMonsters()[monster_index];
+			return monster;
+
+	}
+	
 	public boolean EventHappenedYn() {
 		double v = Math.random();
 		return v>0.4;
+	}
+	
+	public boolean MonsterHappenedYn() {
+		double v = Math.random();
+		return v>0.6;
 	}
 	
 //	public void getMapEvent(Hero hero) { //這個方法會先決定好事還是壞事
@@ -80,7 +97,19 @@ public class RandomMapUtil {
 //	}
 	
 	public void getIntoNewMap(Hero hero){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(hero.getName()+"來到了"+my_map[hero.getX_index()][hero.getY_index()].getId());
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void makeMap() {

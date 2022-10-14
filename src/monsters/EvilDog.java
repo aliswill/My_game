@@ -7,11 +7,13 @@ public class EvilDog extends Monster{
 		this.monster_name="兇惡的野狗";
 		this.alive_yn=true;
 		this.life = 10;
-		this.atk = 9;
-		this.def = 3;
-		this.dex = 3;
-		this.exp = 3;
+		this.atk = 7;
+		this.def = 4;
+		this.dex = 6;
+		this.exp = 2;
+		this.money = 2;
 		this.crit = 0.05;
+		this.monster_level=1;
 		this.atk_style="瘋狗亂咬";
 	}
 

@@ -24,15 +24,22 @@ public class Hero {
 	private int money;
 	private int dex;
 	private int level;
+	private int exp_needed;
 	private double crit;//爆擊率
 	
 	
 	
+//	@Override
+//	public String toString() {
+//		return this.name+"的生命值：" + life + ",魔法力：" + magic + ",攻擊力：" + atk + ",防禦力:" + def + ",魔法攻擊力:" + ats + ",魔法防禦力:"
+//				+ ""
+//				+ res + ",敏捷力：" + dex + ",等級：" + level + ",爆擊率:" + crit;
+//	}
+	
 	@Override
 	public String toString() {
-		return this.name+"的生命值：" + life + ",魔法力：" + magic + ",攻擊力：" + atk + ",防禦力:" + def + ",魔法攻擊力:" + ats + ",魔法防禦力:"
-				+ ""
-				+ res + ",敏捷力：" + dex + ",等級：" + level + ",爆擊率:" + crit;
+		return this.name+"的生命值：" + life  + ",攻擊力：" + atk + ",防禦力:" + def  + 
+				 ",敏捷力：" + dex + ",等級：" + level + ",爆擊率:" + crit +",金錢:" + money;
 	}
 	public Hero(String name) {
 		super();
@@ -40,25 +47,32 @@ public class Hero {
 		this.y_index=1;
 		this.name = name;
 		this.alive_yn=true;
-		this.max_life = 30;
-		this.life = 30;
+		this.max_life = 40;
+		this.life = 40;
 		this.magic = 30;
 		this.atk = 10;
 		this.weapon_atk=0;
 		this.def = 5;
 		this.ats = 5;
 		this.res = 5;
-		this.dex = 10;
+		this.dex = 8;
 		this.crit = 0.1;
 		this.level=1;
 		this.exp=0;
 		this.money = 0;
+		this.exp_needed = 5;
 	}
 	
 	
 	
 	public void getEventEffect(int good_or_bad,int value,int event_type) {
 		int final_value = (good_or_bad*value);		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量
 			case 1:
 				this.money+=final_value;
@@ -73,10 +87,11 @@ public class Hero {
 				System.out.println(this.name+"的DEF變化量:"+final_value);
 				break;
 			case 4:
-				this.def+=final_value;
+				this.dex+=final_value;
 				System.out.println(this.name+"的DEX變化量:"+final_value);
 				break;
 			case 5:
+				final_value = Math.min(this.max_life-this.life,final_value);
 				this.life+=final_value;
 				System.out.println(this.name+"的血量變化量:"+final_value);
 				break;
@@ -84,20 +99,38 @@ public class Hero {
 	}
 	
 	public void move() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("今天想往哪個方向移動?");
 		boolean north=y_index>0;
 		boolean west=x_index>0;
 		boolean south=y_index<2;
 		boolean east=x_index<2;
-		if(north==true) {System.out.print("北 ");}
-		if(west==true) {System.out.print("西 ");}
-		if(south==true) {System.out.print("南 ");}
-		if(east==true) {System.out.print("東 ");}
 		List<String> s = new ArrayList<>();
-		if(north) {s.add("北");}
-		if(east) {s.add("東");}
-		if(west) {s.add("西");}
-		if(south) {s.add("南");}
+		if(north) 
+		{
+			s.add("北");
+			System.out.print("北 ");
+			}
+		if(west) 
+		{
+			s.add("西");
+			System.out.print("西 ");
+			}
+		if(south) 
+		{
+			s.add("南");
+			System.out.print("南 ");
+		}
+		if(east) 
+		{
+			s.add("東");
+			System.out.print("東 ");
+		}
 		
 		Scanner sc = new Scanner(System.in);
 		String direction = sc.next();
@@ -105,20 +138,26 @@ public class Hero {
 			System.out.println("請輸入想移動的方向");
 			direction = sc.next();
 		}
-		if(direction.equals("北")&&north) { //文字要用equals!
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(direction.equals("北")) { //文字要用equals!
 			
 			System.out.println(this.name+"向北移動了一格");
 			y_index--;
 			}
-		else if(direction.equals("東")&&east) {
+		else if(direction.equals("東")) {
 			System.out.println(this.name+"向東移動了一格");
 			x_index++;
 			}
-		else if(direction.equals("南")&&south) {
+		else if(direction.equals("南")) {
 			System.out.println(this.name+"向南移動了一格");
 			y_index++;
 			}
-		else if(direction.equals("西")&&west) {
+		else if(direction.equals("西")) {
 			System.out.println(this.name+"向西移動了一格");
 			x_index--;}	
 		}
@@ -129,19 +168,28 @@ public class Hero {
 	}
 	
 	public void getExperience(int mon_exp) {
+		
 		this.exp+=mon_exp;
 		
-		if(this.exp>5) {
+		while(this.exp>=this.exp_needed) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int last_exp = (this.exp-this.exp_needed);//此次取得的經驗值扣掉升這一等消耗的經驗值
 			this.level+=1;
-			this.exp=0;
+			this.exp=last_exp;
 			this.max_life+=5;
 			this.life=this.max_life;
-			this.magic++;
-			this.atk++;
-			this.def++;
-			this.ats++;
-			this.res++;
-			this.dex++;
+			this.magic+=2;
+			this.atk+=2;
+			this.def+=2;
+			this.ats+=2;
+			this.res+=2;
+			this.dex+=2;
+			this.exp_needed+=5;
 			System.out.println(this.name+"升到"+this.level+"級了!");
 			System.out.println(this.name+"的能力值變為：");
 			System.out.println(this.toString());
@@ -152,10 +200,10 @@ public class Hero {
 		boolean crit_yn = Math.random()>1-this.crit;
 		if(crit_yn==true) {
 			System.out.println(this.name+"使出了憤怒一擊!");
-			return (int) ((this.atk+weapon_atk)*(0.35+Math.random())*1.5);//發生了爆擊
+			return (int) ((this.atk+weapon_atk)*(0.45+Math.random())*1.5);//發生了爆擊
 		}
 		else {
-			return (int) ((this.atk+this.weapon_atk)*(0.35+Math.random()));
+			return (int) ((this.atk+this.weapon_atk)*(0.45+Math.random()));
 		}
 	}
 	
@@ -168,7 +216,7 @@ public class Hero {
 			System.out.println(","+this.name+"受到了"+damage+"點傷害，並且無力的倒下了。勝敗乃兵家常事，請再接再厲!");
 			return damage;
 		}
-		System.out.println(this.name+"受到了"+damage+"點傷害");
+		System.out.println(this.name+"受到了"+damage+"點傷害  (剩餘血量"+this.life+")");
 		return damage;
 	}
 

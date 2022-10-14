@@ -15,14 +15,23 @@ public abstract class MyMap {
 	protected int view_time;
 	protected EventComUtil[] eventComUtil;
 	protected int event_num;
+	protected int monster_num;
 //	protected Map<Integer,String> good_event_type;//依照拜訪次數決定事件名稱
 //	protected Map<Integer,String> bad_event_type;
 
+	
+	public abstract void rebuild();
+	
 	public void view() {
 		this.view_time++;
 	}
 	
 	
+	public int getMonster_num() {
+		return monster_num;
+	}
+
+
 	public EventComUtil getEventComUtil(int i) {
 		return eventComUtil[i];
 	}

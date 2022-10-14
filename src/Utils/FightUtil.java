@@ -15,6 +15,7 @@ public class FightUtil {
 				e.printStackTrace();
 			}
 			if(is_hero_attack(hero.getDex(),monster.getDex())) {//英雄攻擊
+				//目標設計多種指令:1.攻擊 2.使用咒文 3.逃跑(僅在戰鬥一開始可以跑)
 				System.out.println(hero.getName()+"用力的揍了"+monster.getName());
 				monster.hurt(hero);
 				if(!monster.getAliveYN()) {
@@ -22,7 +23,6 @@ public class FightUtil {
 				break;
 			}
 			}else {//怪物攻擊
-				System.out.println(hero.getName()+"被"+monster.getName()+"打得滿地打滾");
 				hero.hurt(monster.attack());
 				if(!hero.isAlive_yn()) {
 					break;
@@ -46,8 +46,9 @@ public class FightUtil {
 		double mom = hero_dex+monster_dex;
 		double son = hero_dex;
 		double hero_attack_ratio=son/mom;
-		if(Math.random()<hero_attack_ratio) {
-			
+		double r = Math.random();
+		
+		if(r<hero_attack_ratio) {			
 			return true;
 		}else {
 			return false;
