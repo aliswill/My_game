@@ -25,6 +25,7 @@ public class OldTomb extends MyMap{
 				,new EventComUtil(-1,0,5,"不小心觸怒了陣亡的英靈，受到詛咒，防禦力下降",5)
 				,new EventComUtil(-1,0,4,"誤入了古戰場怨氣最重的舊刑場，感受到沉重的壓迫感",3)			
 				,new EventComUtil(-1,0,5,"被突然出現的骷髏軍團追殺，狼狽逃離",12)
+				,new EventComUtil(-1,0,2,"因為古戰場戾氣太重，覺得有些頭昏腦脹",1)
 			
 				};
 		this.event_num=eventComUtil.length;//事件總數

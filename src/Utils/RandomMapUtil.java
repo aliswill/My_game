@@ -29,6 +29,11 @@ public class RandomMapUtil {
 		my_map = new MyMap[3][3];		
 	}
 	
+	public MyMap getCurrentMap(Hero hero) {
+		cur_map = my_map[hero.getX_index()][hero.getY_index()];
+		return cur_map;
+	}
+	
 	public void getMapEvent(Hero hero) {//決定該地圖發生的事件
 		if(EventHappenedYn()) {
 			System.out.println("發生了突發事件!");

@@ -39,9 +39,6 @@ public class Town extends MyMap {
 				};
 		this.event_num=eventComUtil.length;//事件總數
 		this.monster_num=monsters.length;
-//		this.good_event_type = new HashMap<Integer,String>();
-//		good_event_type.put(1,"");
-//		this.bad_event_type = new HashMap<Integer,String>();
 	}
 	
 	public void rebuild() {

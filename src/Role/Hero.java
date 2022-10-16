@@ -2,6 +2,7 @@ package Role;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import Utils.EventComUtil;
@@ -17,6 +18,7 @@ public class Hero {
 	private int magic;
 	private int atk;
 	private int weapon_atk;
+	private int equ_def;
 	private int def;
 	private int ats;
 	private int res;
@@ -73,7 +75,7 @@ public class Hero {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量
+		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量 6:物品損失 7:取得物品
 			case 1:
 				this.money+=final_value;
 				System.out.println(this.name+"的金錢變化量:"+final_value);
@@ -95,6 +97,17 @@ public class Hero {
 				this.life+=final_value;
 				System.out.println(this.name+"的血量變化量:"+final_value);
 				break;
+			case 6:
+				this.weapon_atk=0;
+				this.equ_def=0;
+				System.out.println(this.name+"的裝備被劫掠一空了!");
+			case 7:
+				if(this.weapon_atk<final_value) {
+					System.out.println(this.name+"穿上了撿到的裝備!");
+					this.weapon_atk=final_value;
+				}else {
+					System.out.println(this.name+"嫌裝備太重，因此把他留在原地就走了");
+				}
 		}
 	}
 	
@@ -196,6 +209,12 @@ public class Hero {
 		}
 	}
 	
+	
+//	public int magic_attack() {
+//		Random r = new Random();
+//		r.
+//	} 
+	
 	public int attack() {
 		boolean crit_yn = Math.random()>1-this.crit;
 		if(crit_yn==true) {
@@ -224,6 +243,10 @@ public class Hero {
 		return name;
 	}
 
+	
+	public int getMoney() {
+		return money;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -312,6 +335,39 @@ public class Hero {
 	}
 	public int getY_index() {
 		return y_index;
+	}
+	public int getMax_life() {
+		return max_life;
+	}
+	public void setMax_life(int max_life) {
+		this.max_life = max_life;
+	}
+	public int getWeapon_atk() {
+		return weapon_atk;
+	}
+	public void setWeapon_atk(int weapon_atk) {
+		this.weapon_atk = weapon_atk;
+	}
+	public int getExp() {
+		return exp;
+	}
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+	public int getExp_needed() {
+		return exp_needed;
+	}
+	public void setExp_needed(int exp_needed) {
+		this.exp_needed = exp_needed;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	public int getEqu_def() {
+		return equ_def;
+	}
+	public void setEqu_def(int equ_def) {
+		this.equ_def = equ_def;
 	}
 	
 	

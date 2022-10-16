@@ -6,6 +6,9 @@ import monsters.Monster;
 public class FightUtil {
 	public FightUtil() {}
 	
+	
+	
+	
 	public void fight(Hero hero,Monster monster) {
 		while(hero.isAlive_yn()&&monster.getAliveYN()) {
 			try {
