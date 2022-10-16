@@ -75,7 +75,7 @@ public class Hero {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量 6:物品損失 7:取得物品
+		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量 6:物品損失 7:取得物品(攻擊力) 8:取得物品(防禦力)
 			case 1:
 				this.money+=final_value;
 				System.out.println(this.name+"的金錢變化量:"+final_value);
@@ -106,7 +106,14 @@ public class Hero {
 					System.out.println(this.name+"穿上了撿到的裝備!");
 					this.weapon_atk=final_value;
 				}else {
-					System.out.println(this.name+"嫌裝備太重，因此把他留在原地就走了");
+					System.out.println(this.name+"覺得自己身上的武器比較好，因此把它留在原地就走了");
+				}
+			case 8:
+				if(this.equ_def<final_value) {
+					System.out.println(this.name+"穿上了撿到的裝備!");
+					this.equ_def=final_value;
+				}else {
+					System.out.println(this.name+"覺得自己身上的裝備比較好，因此把它留在原地就走了");
 				}
 		}
 	}

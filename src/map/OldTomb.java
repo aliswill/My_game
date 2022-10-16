@@ -3,7 +3,9 @@ package map;
 import Utils.EventComUtil;
 import monsters.Bastard;
 import monsters.EvilDog;
+import monsters.GhostFire;
 import monsters.Monster;
+import monsters.SkeletonArmy;
 
 public class OldTomb extends MyMap{
 
@@ -13,8 +15,8 @@ public class OldTomb extends MyMap{
 		this.id=id;
 		this.map_level = 5;
 		this.map_name = "古戰場的墓地";
-		this.monsters = new Monster[]{};//待補
-		this.effect_param = 1.5;//此地圖事件影響的倍率加乘
+		this.monsters = new Monster[]{new SkeletonArmy(),new GhostFire()};
+		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;
 		this.eventComUtil = new EventComUtil[] {
 				new EventComUtil(1,0,1,"撿到一件古代將軍的鎧甲，賣給了喜愛骨董的商人，獲得了不少錢",15)//好事/無特殊條件/金錢類事件/影響值
@@ -33,6 +35,6 @@ public class OldTomb extends MyMap{
 		}
 	
 	public void rebuild() {
-		this.monsters = new Monster[]{    };//刷新怪物，避免指到同一隻怪物***要補
+		this.monsters = new Monster[]{new SkeletonArmy(),new GhostFire()};
 	}
 }

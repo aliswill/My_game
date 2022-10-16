@@ -24,9 +24,9 @@ public class Town extends MyMap {
 		this.view_time=0;
 		
 		this.eventComUtil = new EventComUtil[] {
-				new EventComUtil(1,0,1,"在路上撿到了舊錢包",5)//好事/無特殊條件/金錢類事件/影響值
-				,new EventComUtil(1,0,1,"偶然抓到了通緝犯",15)//
-				,new EventComUtil(1,0,1,"熱心幫助了路人，得到了褒獎",10)
+				new EventComUtil(1,0,1,"在路上撿到了舊錢包",3)//好事/無特殊條件/金錢類事件/影響值
+				,new EventComUtil(1,0,1,"偶然抓到了通緝犯",10)//
+				,new EventComUtil(1,0,1,"熱心幫助了路人，得到了褒獎",5)
 				,new EventComUtil(1,0,2,"認真訓練搏擊，提升了攻擊力",1)
 				,new EventComUtil(1,0,2,"撿到一顆不知名的藥丸，食用後能力值似乎有所上升?",1)
 				,new EventComUtil(1,0,3,"撿到一本防禦秘笈，防禦值上升",1)
