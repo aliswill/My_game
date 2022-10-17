@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Utils.EventComUtil;
+import Utils.WaitUtil;
 
 public class Hero {
 
@@ -28,6 +29,7 @@ public class Hero {
 	private int level;
 	private int exp_needed;
 	private double crit;//爆擊率
+	private int max_magic;
 	
 	
 	
@@ -52,11 +54,12 @@ public class Hero {
 		this.max_life = 40;
 		this.life = 40;
 		this.magic = 30;
+		this.max_magic = 30;
 		this.atk = 10;
 		this.weapon_atk=0;
-		this.def = 5;
-		this.ats = 5;
-		this.res = 5;
+		this.def = 8;
+		this.ats = 8;
+		this.res = 8;
 		this.dex = 8;
 		this.crit = 0.1;
 		this.level=1;
@@ -69,12 +72,7 @@ public class Hero {
 	
 	public void getEventEffect(int good_or_bad,int value,int event_type) {
 		int final_value = (good_or_bad*value);		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WaitUtil.wait(1000);
 		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量 6:物品損失 7:取得物品(攻擊力) 8:取得物品(防禦力)
 			case 1:
 				this.money+=final_value;
@@ -108,6 +106,7 @@ public class Hero {
 				}else {
 					System.out.println(this.name+"覺得自己身上的武器比較好，因此把它留在原地就走了");
 				}
+				break;
 			case 8:
 				if(this.equ_def<final_value) {
 					System.out.println(this.name+"穿上了撿到的裝備!");
@@ -115,16 +114,12 @@ public class Hero {
 				}else {
 					System.out.println(this.name+"覺得自己身上的裝備比較好，因此把它留在原地就走了");
 				}
+				break;
 		}
 	}
 	
 	public void move() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WaitUtil.wait(1000);
 		System.out.println("今天想往哪個方向移動?");
 		boolean north=y_index>0;
 		boolean west=x_index>0;
@@ -158,12 +153,7 @@ public class Hero {
 			System.out.println("請輸入想移動的方向");
 			direction = sc.next();
 		}
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WaitUtil.wait(1000);
 		if(direction.equals("北")) { //文字要用equals!
 			
 			System.out.println(this.name+"向北移動了一格");
@@ -187,29 +177,67 @@ public class Hero {
 		System.out.println("當前在"+x_index+","+y_index);
 	}
 	
-	public void getExperience(int mon_exp) {
+	
+	public void getMoney(int mon_money) {
+		this.money+=mon_money;
+		System.out.println(this.name+"的金錢增加了"+mon_money);
+	}
+	
+	public void newLevelWish() {
+		System.out.println(name+"等級提升，受到冒險之神的眷顧，可以許一個願望，請選擇：");
+		System.out.println("Q:生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
+		System.out.println("W:提升攻擊力、防禦力、敏捷力各3點");
+		System.out.println("E:提升隨機能力值10點(最大生命值/最大魔法值/攻擊/防禦/敏捷/爆擊)");
+		Scanner sc = new Scanner(System.in);
+		String v = sc.next();
+		while(!v.equalsIgnoreCase("Q")&&!v.equalsIgnoreCase("W")&&!v.equalsIgnoreCase("E")) {
+			System.out.println("(請輸入對應按鍵)");
+			v = sc.next();
+		}
+		if(v.equalsIgnoreCase("Q")) {
+			this.life=this.max_life;
+			this.magic=this.max_magic;
+			this.atk+=1;
+			this.def+=1;
+			this.dex+=1;
+		}else if(v.equalsIgnoreCase("W")) {
+			this.atk+=3;
+			this.def+=3;
+			this.dex+=3;
+		}else {
+			double son = Math.random();
+			double mom = 100/6;
+			switch((int)(son/mom)) {
+				case 0:
+					this.max_life+=10;
+				case 1:
+					this.max_magic+=10;
+				case 2:
+					this.atk+=10;
+				case 3:
+					this.def+=10;
+				case 4:
+					this.dex+=10;
+				case 5:
+					if(this.crit<=0.9) {
+						this.crit+=0.1;
+					}
+					
+			}
+		}
+	}
+	
+	public void getExperience(int mon_exp) {//待修正，升級效果由玩家選擇
 		
 		this.exp+=mon_exp;
 		
 		while(this.exp>=this.exp_needed) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			WaitUtil.wait(1000);
 			int last_exp = (this.exp-this.exp_needed);//此次取得的經驗值扣掉升這一等消耗的經驗值
 			this.level+=1;
 			this.exp=last_exp;
-			this.max_life+=5;
-			this.life=this.max_life;
-			this.magic+=2;
-			this.atk+=2;
-			this.def+=2;
-			this.ats+=2;
-			this.res+=2;
-			this.dex+=2;
 			this.exp_needed+=5;
+			newLevelWish();
 			System.out.println(this.name+"升到"+this.level+"級了!");
 			System.out.println(this.name+"的能力值變為：");
 			System.out.println(this.toString());
@@ -239,7 +267,7 @@ public class Hero {
 		
 		if(this.life<=0) {			
 			this.alive_yn=false;
-			System.out.println(","+this.name+"受到了"+damage+"點傷害，並且無力的倒下了。勝敗乃兵家常事，請再接再厲!");
+			System.out.println(this.name+"受到了"+damage+"點傷害，並且無力的倒下了。勝敗乃兵家常事，請再接再厲!");
 			return damage;
 		}
 		System.out.println(this.name+"受到了"+damage+"點傷害  (剩餘血量"+this.life+")");
@@ -376,7 +404,16 @@ public class Hero {
 	public void setEqu_def(int equ_def) {
 		this.equ_def = equ_def;
 	}
+	public int getMax_magic() {
+		return max_magic;
+	}
+	public void setMax_magic(int max_magic) {
+		this.max_magic = max_magic;
+	}
 	
-	
+	public void setLocation(int x,int y) {
+		this.x_index=x;
+		this.y_index=y;
+	}
 	
 }

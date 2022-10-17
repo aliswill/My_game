@@ -69,16 +69,61 @@ public class StoreUtil {
 		System.out.println("今晚需要住宿旅店嗎? (請輸入Y/N)");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
-		while(!v.equals("Y")&&!v.equals("N")) {
+		while(!v.equalsIgnoreCase("Y")&&!v.equalsIgnoreCase("N")) {
 			System.out.println("(請輸入Y/N)");
 			v = sc.next();
 		}
-		if(v.equals("Y")) {//開始購物
+		if(v.equalsIgnoreCase("Y")) {//開始購物
 			System.out.println("想找什麼樣的旅店呢? (按對應鍵入住，或按Z離開)");
 			System.out.println("Q:歇腳的旅店(恢復少量生命值，一晚5元) W:闊氣的旅店(恢復較多生命值，一晚10元)");
-			System.out.println("E:溫泉會館(恢復部分魔法力，一晚7元)" );
-		}else if(v.equals("N")) {
+			System.out.println("E:溫泉會館(恢復少量生命值與魔法力，一晚10元)" );
+			String v1 = sc.next();
+			while(!v1.equalsIgnoreCase("Q")&&!v1.equalsIgnoreCase("W")&&!v1.equalsIgnoreCase("E")&&!v1.equalsIgnoreCase("Z")) {
+				System.out.println("(按對應鍵入住，或按Z離開)");
+				v1 = sc.next();
+			}
+			relax(v1,hero);
+		}else if(v.equalsIgnoreCase("N")) {
 			//do nothing
+		}
+	}
+	
+	private void relax(String input,Hero hero) {
+		if(input.equalsIgnoreCase("Q")) {
+			if(hero.getMoney()>=5) {
+				hero.setMoney(hero.getMoney()-5);
+				int final_value = Math.min(hero.getLife()+(int)(hero.getMax_life()*0.25), hero.getMax_life());
+				System.out.println(hero.getName()+"在歇腳的旅店休息了一晚，生命值恢復了"+final_value);
+				hero.setLife(final_value);
+			}else {
+				System.out.println("沒錢還是自己搭個帳篷就好吧..");
+			}
+			
+		}else if(input.equalsIgnoreCase("W")) {
+			if(hero.getMoney()>=10) {
+				hero.setMoney(hero.getMoney()-10);
+				int final_value = Math.min(hero.getLife()+(int)(hero.getMax_life()*0.55), hero.getMax_life());
+				System.out.println(hero.getName()+"在闊氣的旅店舒服地休息了一晚，生命值恢復了"+final_value);
+				hero.setLife(final_value);
+			}else {
+				System.out.println("沒錢還是自己搭個帳篷就好吧..");
+			}
+			
+			
+			
+		}else if(input.equalsIgnoreCase("E")) {
+			if(hero.getMoney()>=10) {
+				int l_final_value = Math.min(hero.getLife()+(int)(hero.getMax_life()*0.3), hero.getMax_life());
+				int m_final_value = Math.min(hero.getMagic()+(int)(hero.getMax_magic()*0.3), hero.getMax_magic());
+				System.out.println(hero.getName()+"在溫泉會館做了紓壓按摩，生命值恢復了"+l_final_value+",魔法力恢復了"+m_final_value);
+				hero.setMagic(m_final_value);
+				hero.setLife(l_final_value);
+			}else {
+				System.out.println("沒錢還是自己搭個帳篷就好吧..");
+			}		
+			
+		}else if(input.equalsIgnoreCase("Z")) {
+			System.out.println("店主：有機會再來住店哦！");
 		}
 	}
 	

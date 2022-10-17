@@ -5,9 +5,9 @@ public class StrongBear extends Monster {
 		super();
 		this.monster_name="飢餓的熊";
 		this.alive_yn=true;
-		this.life = 35;
-		this.atk = 17;
-		this.def = 15;
+		this.life = 24;
+		this.atk = 13;
+		this.def = 10;
 		this.dex = 12;
 		this.exp = 10;
 		this.money = 7;

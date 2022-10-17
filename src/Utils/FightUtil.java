@@ -11,18 +11,14 @@ public class FightUtil {
 	
 	public void fight(Hero hero,Monster monster) {
 		while(hero.isAlive_yn()&&monster.getAliveYN()) {
-			try {
-				Thread.sleep(1200);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			WaitUtil.wait(1000);
 			if(is_hero_attack(hero.getDex(),monster.getDex())) {//英雄攻擊
 				//目標設計多種指令:1.攻擊 2.使用咒文 3.逃跑(僅在戰鬥一開始可以跑)
 				System.out.println(hero.getName()+"用力的揍了"+monster.getName());
 				monster.hurt(hero);
 				if(!monster.getAliveYN()) {
 				hero.getExperience(monster.getExp());
+				hero.getMoney(monster.getMoney());
 				break;
 			}
 			}else {//怪物攻擊

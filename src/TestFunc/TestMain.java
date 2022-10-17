@@ -8,9 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Role.Hero;
+import Role.NPC;
 import Utils.FightUtil;
 import Utils.RandomMapUtil;
 import Utils.StoreUtil;
+import Utils.WaitUtil;
 import monsters.FunnySnake;
 import monsters.Monster;
 
@@ -18,7 +20,10 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		
+		NPC npc1 = new NPC();
 		
+		
+	//	System.out.println(	npc1.getClass().getMethods().toString());
 		
 //		//測試咒語部分 隨機產生字串
 //		byte[] b_arr = {'a','b','c','d','e','f','g'};//new byte[20];
@@ -37,14 +42,21 @@ public class TestMain {
 		Scanner scanner = new Scanner(System.in);
 		String name = scanner.next();
 		Hero hero = new Hero(name);
+		NPC npc = new NPC();
+		
 		
 		RandomMapUtil maputil = new RandomMapUtil();
 		maputil.makeMap();
-		maputil.getIntoNewMap(hero);
+		maputil.reLocateHero(hero);
+		//maputil.getIntoNewMap(hero);
 		
 		while(day<=12) {
+			WaitUtil.wait(1000);
 			System.out.println("今天是第"+day+"天");
+			npc.Traveler(hero,maputil);
+			npc.Beggar(hero);
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
+				WaitUtil.wait(1000);
 				StoreUtil storeutil = new StoreUtil();
 				String welcome_yn = storeutil.welcomStore();
 				storeutil.useStore(hero, welcome_yn);
@@ -58,10 +70,22 @@ public class TestMain {
 				System.out.println(monster.toString());
 				FightUtil fightutil= new FightUtil();
 				fightutil.fight(hero, monster);
+				if(!hero.isAlive_yn()) {
+					System.out.println("遊戲結束!請下次再挑戰");
+					break;
+				}
 			}else {
+				WaitUtil.wait(1000);
 				System.out.println("今天沒有遭遇怪物。");
 			}
 			maputil.getMapEvent(hero);
+			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
+				StoreUtil storeutil = new StoreUtil();
+				storeutil.useHotel(hero);
+				
+			}
+			WaitUtil.wait(1000);
+			System.out.println("--------------------------------------------");
 			System.out.println("今天"+hero.getName()+"的狀態值為:"+hero.toString());
 			day++;
 		}
