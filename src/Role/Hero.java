@@ -210,19 +210,25 @@ public class Hero {
 			switch((int)(son/mom)) {
 				case 0:
 					this.max_life+=10;
+					break;
 				case 1:
 					this.max_magic+=10;
+					break;
 				case 2:
 					this.atk+=10;
+					break;
 				case 3:
 					this.def+=10;
+					break;
 				case 4:
 					this.dex+=10;
+					break;
 				case 5:
 					if(this.crit<=0.9) {
 						this.crit+=0.1;
+						break;
 					}
-					
+					break;
 			}
 		}
 	}
@@ -239,7 +245,9 @@ public class Hero {
 			this.exp_needed+=5;
 			newLevelWish();
 			System.out.println(this.name+"升到"+this.level+"級了!");
+			WaitUtil.wait(1000);
 			System.out.println(this.name+"的能力值變為：");
+			WaitUtil.wait(1000);
 			System.out.println(this.toString());
 		}
 	}

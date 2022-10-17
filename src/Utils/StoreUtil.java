@@ -24,17 +24,37 @@ public class StoreUtil {
 		commodities.put("I", new Commodity(50,"鴨鴨布偶裝",2,7));
 	}
 	
+//	public String welcomStore() {
+//		System.out.println("這裡有熱鬧的商店街，想要拜訪商店嗎? (請輸入Y/N)");
+//		try (Scanner sc = new Scanner(System.in)) {
+//			String v = sc.next();
+//			while(!v.equalsIgnoreCase("Y")&&!v.equalsIgnoreCase("N")) {
+//				System.out.println("(請輸入Y/N)");
+//				v = sc.next();
+//				
+//			}
+//			
+//			return v;
+//		}catch(Exception e) {
+//			throw(e);			
+//		}
+//		
+//	}
+	
+	
 	public String welcomStore() {
-		System.out.println("這裡有熱鬧的商店街，想要拜訪商店嗎? (請輸入Y/N)");
+	System.out.println("這裡有熱鬧的商店街，想要拜訪商店嗎? (請輸入Y/N)");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
-		while(!v.equals("Y")&&!v.equals("N")) {
+		while(!v.equalsIgnoreCase("Y")&&!v.equalsIgnoreCase("N")) {
 			System.out.println("(請輸入Y/N)");
-			v = sc.next();
+			v = sc.next();			
 		}
 		
 		return v;
-	}
+	
+	
+}
 	
 	public void useStore(Hero hero,String welcome_yn) {
 		

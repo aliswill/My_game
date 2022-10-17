@@ -54,15 +54,16 @@ public class RandomMapUtil {
 		}
 		if(south) {
 			s_level = my_map[hero.getX_index()][hero.getY_index()+1].getMap_level();
-		}if(west) {
+		}
+		if(west) {
 			w_level = my_map[hero.getX_index()-1][hero.getY_index()].getMap_level();
-		}if(east) {
+		}
+		if(east) {
 			e_level = my_map[hero.getX_index()+1][hero.getY_index()].getMap_level();
 		}
 		int[] arr = {n_level,s_level,w_level,e_level};
 		Arrays.sort(arr);
-		System.out.println(Arrays.toString(arr));
-		System.out.println(arr[arr.length-1]);
+		
 		if(arr[arr.length-1]==n_level) {
 			return "北";
 		}else if(arr[arr.length-1]==s_level) {
@@ -105,7 +106,7 @@ public class RandomMapUtil {
 		//MyMap town = my_map.;
 		for(int x=0;x<3;x++) {
 			for(int y=0;y<3;y++) {
-				if(my_map[x][y].getMap_name()=="平凡的小鎮") {
+				if(my_map[x][y].getMap_name().equals("平凡的小鎮")){
 					System.out.println(hero.getName()+"是一名嚮往充滿挑戰性的生活的冒險家，他將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
 					hero.setLocation(x, y);
 				}

@@ -10,7 +10,7 @@ import monsters.Beggar;
 
 public class NPC {
 
-	public void Beggar(Hero hero) {
+	public void meetBeggar(Hero hero) {
 		System.out.println("一名乞丐蜷曲著雙腿對你乞討");
 		WaitUtil.wait(1000);
 		System.out.println("請選擇：　W:給他錢 E:搶他碗裡的錢 任意鍵:無視");
@@ -53,7 +53,7 @@ public class NPC {
 		}		
 	}
 	
-	public void Traveler(Hero hero,RandomMapUtil maputil) {
+	public void meetTraveler(Hero hero,RandomMapUtil maputil) {
 		
 		System.out.println("前方出現一名狼狽不堪的旅行者，全身都是汙跡跟血漬");
 		WaitUtil.wait(1000);

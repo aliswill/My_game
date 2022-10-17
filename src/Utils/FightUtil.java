@@ -36,22 +36,15 @@ public class FightUtil {
 	public boolean is_hero_attack(int hero_dex,int monster_dex) {
 		//利用敏捷來回傳此輪誰進行攻擊
 		if(hero_dex+monster_dex==0) {
-			if(Math.random()>0.5) {
-				return true;
-			}else {
-				return false;
-			}					
+			return Math.random()>0.5;
 		}
 		double mom = hero_dex+monster_dex;
 		double son = hero_dex;
 		double hero_attack_ratio=son/mom;
 		double r = Math.random();
 		
-		if(r<hero_attack_ratio) {			
-			return true;
-		}else {
-			return false;
-		}
+		return r<hero_attack_ratio;
+		
 	}
 	
 //	public double getRatio() {
