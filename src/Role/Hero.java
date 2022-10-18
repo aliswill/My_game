@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import Utils.CheckType;
 import Utils.EventComUtil;
+import Utils.FightUtil;
+import Utils.RandomMapUtil;
 import Utils.WaitUtil;
+import monsters.Beggar;
+import monsters.Monster;
 
 public class Hero {
 
@@ -64,7 +69,7 @@ public class Hero {
 		this.crit = 0.1;
 		this.level=1;
 		this.exp=0;
-		this.money = 0;
+		this.money = 10;
 		this.exp_needed = 5;
 	}
 	
@@ -72,7 +77,7 @@ public class Hero {
 	
 	public void getEventEffect(int good_or_bad,int value,int event_type) {
 		int final_value = (good_or_bad*value);		
-		WaitUtil.wait(1000);
+		WaitUtil.wait(1300);
 		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量 6:物品損失 7:取得物品(攻擊力) 8:取得物品(防禦力)
 			case 1:
 				this.money+=final_value;
@@ -119,7 +124,7 @@ public class Hero {
 	}
 	
 	public void move() {
-		WaitUtil.wait(1000);
+		WaitUtil.wait(1300);
 		System.out.println("今天想往哪個方向移動?");
 		boolean north=y_index>0;
 		boolean west=x_index>0;
@@ -153,7 +158,7 @@ public class Hero {
 			System.out.println("請輸入想移動的方向");
 			direction = sc.next();
 		}
-		WaitUtil.wait(1000);
+		WaitUtil.wait(1300);
 		if(direction.equals("北")) { //文字要用equals!
 			
 			System.out.println(this.name+"向北移動了一格");
@@ -238,16 +243,16 @@ public class Hero {
 		this.exp+=mon_exp;
 		
 		while(this.exp>=this.exp_needed) {
-			WaitUtil.wait(1000);
+			WaitUtil.wait(1300);
 			int last_exp = (this.exp-this.exp_needed);//此次取得的經驗值扣掉升這一等消耗的經驗值
 			this.level+=1;
 			this.exp=last_exp;
 			this.exp_needed+=5;
 			newLevelWish();
 			System.out.println(this.name+"升到"+this.level+"級了!");
-			WaitUtil.wait(1000);
+			WaitUtil.wait(1300);
 			System.out.println(this.name+"的能力值變為：");
-			WaitUtil.wait(1000);
+			WaitUtil.wait(1300);
 			System.out.println(this.toString());
 		}
 	}
@@ -282,6 +287,164 @@ public class Hero {
 		return damage;
 	}
 
+	public void meetBeggar() {
+		System.out.println("一名乞丐蜷曲著雙腿對你乞討");
+		WaitUtil.wait(1300);
+		System.out.println("請選擇：　W:給他錢 E:搶他碗裡的錢 任意鍵:無視");
+		Scanner sc = new Scanner(System.in);
+		String v = sc.next();
+		if(v.equalsIgnoreCase("w")) {
+			int gived_money = (int)(this.money*0.3);
+			if(gived_money>0) {
+				System.out.println(this.name+"給了乞丐"+gived_money+"元");
+				WaitUtil.wait(1300);
+				System.out.println("乞丐感激地收下了錢");
+				WaitUtil.wait(1300);
+				System.out.println("乞丐:謝謝你的幫助，好心的旅人，其實我年輕時也喜歡到各地冒險，我教給你一些防身的技巧如何?");
+				WaitUtil.wait(1300);
+				this.atk+=1;
+				System.out.println(this.name+"的攻擊力提升了1");
+			}else {
+				System.out.println(this.name+"沒有錢可以給乞丐...");
+			}
+			
+		}else if(v.equalsIgnoreCase("e")) {
+			System.out.println(this.name+"伸手要搶乞丐碗裡的幾個銅板");
+			WaitUtil.wait(1300);
+			System.out.println("乞丐:真是世風日下啊!是你先對我不仁，休怪我了!");
+			WaitUtil.wait(1300);
+			Monster monster = new Beggar();
+			System.out.println(this.name+"遭遇了等級"+monster.getMonster_level()+"的"+monster.getName()+"!");
+			System.out.println(monster.toString());
+			FightUtil fightutil= new FightUtil();
+			fightutil.fight(this, monster);
+			if(!this.isAlive_yn()) {
+				System.out.println("乞丐：年輕人，我給你一次機會，下次不要在幹這種缺德事了");
+				this.setAlive_yn(true);
+				this.setLife(1);
+				System.out.println(this.name+"的生命值剩餘1");
+			}
+		}else {
+			System.out.println("("+this.name+"無視了他");
+			
+		}		
+	}
+	
+	public void meetTraveler(RandomMapUtil maputil) {
+			
+			System.out.println("前方出現一名狼狽不堪的旅行者，全身都是汙跡跟血漬");
+			WaitUtil.wait(1300);
+			System.out.println("請選擇：　W:嘲笑他  E:遞給他水喝 任意鍵:無視");
+			Scanner sc = new Scanner(System.in);
+			String v = sc.next();
+			if(v.equalsIgnoreCase("w")) {
+				System.out.println(this.name+":你怎麼搞的這麼狼狽啊~沒實力還是別出來冒險吧哈哈");
+				WaitUtil.wait(1300);
+				System.out.println("狼狽不堪的旅行者瞪了一眼"+this.name+"並踱著緩步走了");
+			}else if(v.equalsIgnoreCase("e")) {
+				System.out.println("狼狽不堪的旅行者：謝謝你啊~你也是旅行者吧?");
+				WaitUtil.wait(1300);
+				System.out.println("狼狽不堪的旅行者：其實啊..我剛剛從"+ maputil.getDanagerousDirection(this)+"方而來");
+				WaitUtil.wait(1300);
+				System.out.println("狼狽不堪的旅行者：那裏的敵人都特別強大，你最好不要往那邊走");
+				WaitUtil.wait(1300);
+				System.out.println("狼狽不堪的旅行者：那麼再會了，謝謝你的茶水~");
+			}else {
+				System.out.println("("+this.name+"無視了他)");
+				WaitUtil.wait(1300);
+				System.out.println("旅行者步履蹣跚地走了");
+			}		
+		}
+	
+	
+	public void meetGambler() {
+		System.out.println("一名穿著名貴西裝的男人主動走過來向你搭話");
+		WaitUtil.wait(1300);
+		System.out.println("穿西裝的男人:唷~旅行者，每天冒險的日子不累嗎?");
+		WaitUtil.wait(1300);
+		System.out.println("穿西裝的男人:想不想嘗試輕輕鬆鬆賺快錢的方法?");
+		WaitUtil.wait(1300);
+		System.out.println("請選擇：　W:想!非常想 E:什麼方法? 任意鍵:不想。");
+		Scanner sc = new Scanner(System.in);
+		String v = sc.next();
+		if(v.equalsIgnoreCase("w")||v.equalsIgnoreCase("e")) {
+			System.out.println("穿西裝的男人:有興趣就對啦~很簡單的!");
+			WaitUtil.wait(1300);
+			System.out.println("穿西裝的男人:我寫下1~25中的一個數字，給你三次機會，只要你猜中了，我就把賭本貼三倍給你，如何?");
+			WaitUtil.wait(1300);
+			System.out.println("穿西裝的男人:猜錯的時候我也會給你提示，來吧~你想押多少");
+			WaitUtil.wait(1300);
+			System.out.println("請選擇：　W:身上一半的錢 E:身上全部的錢 任意鍵:不押，賭博是不好的");
+			String v1 = sc.next();
+			if(this.money<2) {
+				System.out.println(this.name+":抱歉..我身上錢不夠..");
+			}
+			else if(v.equalsIgnoreCase("w")){
+				int gam_num = (int) (this.money*0.5);
+				if(playGuessNumber()) {
+					this.money+=(gam_num*2);
+					WaitUtil.wait(1300);
+					System.out.println(this.name+"的金錢變為:"+this.money);
+				}else {
+					this.money-=gam_num;
+					WaitUtil.wait(1300);
+					System.out.println(this.name+"的金錢變為:"+this.money);
+				}
+				
+			}else if(v.equalsIgnoreCase("e")) {
+				int gam_num = this.money;
+				if(playGuessNumber()) {
+					this.money+=(gam_num*2);
+					WaitUtil.wait(1300);
+					System.out.println(this.name+"的金錢變為:"+this.money);
+				}else {
+					this.money-=gam_num;
+					WaitUtil.wait(1300);
+					System.out.println(this.name+"的金錢變為:"+this.money);
+				}
+			}else {
+				System.out.println("穿西裝的男人:是你自己讓機會溜走的~別後悔啊");
+			}
+		}else {
+			System.out.println("穿西裝的男人:诶~真冷淡耶~");
+			WaitUtil.wait(1300);
+			System.out.println("穿西裝的男人:改變心意記得跟我說喔!");
+		}
+	}
+	
+	public boolean playGuessNumber() {
+		int ans = (int)(Math.random()*25)+1;
+		int time=0;
+		System.out.println("穿西裝的男人:答案已經出好，你開始猜吧");	
+		Scanner sc = new Scanner(System.in);
+		while(time<3) {					
+			String v = sc.next();
+			while(!CheckType.isNumeric(v)) {
+				System.out.println("穿西裝的男人:喂喂，我說猜數字欸數字");	
+				v = sc.next();
+			}
+			int guess_num = Integer.parseInt(v);										
+			if(guess_num<ans) {
+				System.out.println("穿西裝的男人:哈哈!再大一些");
+			}else if(guess_num>ans) {
+				System.out.println("穿西裝的男人:可惜囉!再小一些");
+			}else {
+				System.out.println("穿西裝的男人:喔!不!你怎麼可能猜中..");
+				
+				return true;
+			}
+			time++;
+		}
+		System.out.println("穿西裝的男人:哈哈!又是一頭肥羊!謝謝你啦~");
+		return false;
+	}
+	
+	public void meetInformationVendor() {
+		System.out.println("");
+		WaitUtil.wait(1300);
+		System.out.println("");
+	}
+	
 	public String getName() {
 		return name;
 	}

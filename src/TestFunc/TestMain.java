@@ -53,8 +53,9 @@ public class TestMain {
 		while(day<=12) {
 			WaitUtil.wait(1000);
 			System.out.println("今天是第"+day+"天");
-			npc.meetTraveler(hero,maputil);
-			npc.meetBeggar(hero);
+			hero.meetGambler();
+			hero.meetTraveler(maputil);
+			hero.meetBeggar();
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
 				WaitUtil.wait(1000);
 				StoreUtil storeutil = new StoreUtil();
