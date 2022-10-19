@@ -28,7 +28,7 @@ public class WindyDesert extends MyMap{
 				,new EventComUtil(-1,0,5,"誤入了不知是誰設置的陷阱，摔傷了腿",13)
 				,new EventComUtil(-1,0,1,"被狂風颳走了行李，遺失備用錢包",10)
 				,new EventComUtil(-1,0,5,"被捲入無底的流沙，費盡千辛萬苦才爬了出來",20)
-				,new EventComUtil(-1,0,4,"遭遇沙塵暴，風砂刺進了眼睛，導致敏捷力下降",3)
+				,new EventComUtil(-1,0,4,"遭遇沙塵暴，風砂刺進了眼睛，導致敏捷力下降",2)
 				,new EventComUtil(-1,0,6,"遭遇強大的沙匪，被搶走了全身的裝備...",0)
 				};
 		this.event_num=eventComUtil.length;//事件總數

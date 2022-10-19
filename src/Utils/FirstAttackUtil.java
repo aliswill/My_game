@@ -1,6 +1,6 @@
 package Utils;
 
-public class FirstAttackUtil {
+public class FirstAttackUtil {//already no use
 
 	public boolean isFirst(int a_dex,int b_dex) {//看誰先攻
 		if(a_dex>b_dex) {

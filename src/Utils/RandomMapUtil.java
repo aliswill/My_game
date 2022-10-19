@@ -107,7 +107,7 @@ public class RandomMapUtil {
 		for(int x=0;x<3;x++) {
 			for(int y=0;y<3;y++) {
 				if(my_map[x][y].getMap_name().equals("平凡的小鎮")){
-					System.out.println(hero.getName()+"是一名嚮往充滿挑戰性的生活的冒險家，他將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
+					SpeakUtil.speak(hero.getName()+"是一名嚮往充滿挑戰性的生活的冒險家，他將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
 					hero.setLocation(x, y);
 				}
 			}
@@ -121,19 +121,19 @@ public class RandomMapUtil {
 	
 	public void getMapEvent(Hero hero) {//決定該地圖發生的事件
 		if(EventHappenedYn()) {
-			WaitUtil.wait(1000);
-			System.out.println("發生了突發事件!");
-			WaitUtil.wait(1000);
+			
+			SpeakUtil.speak("發生了突發事件!");
+			
 			cur_map = my_map[hero.getX_index()][hero.getY_index()];
 			int map_event_num = cur_map.getEvent_num();
 			double v = Math.random()*100;
 			int event_index = (int)(v/(100/map_event_num));
 			EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);
-			System.out.println(hero.getName()+eventComUtil.getEvent_describe());
+			SpeakUtil.speak(hero.getName()+eventComUtil.getEvent_describe());
 			hero.getEventEffect(eventComUtil.getGood_or_bad_type(),(int)(eventComUtil.getOrigin_value()*cur_map.getEffect_param()),eventComUtil.getEvent_type());//好事壞事/影響值/事件類型
 		}else {
-			WaitUtil.wait(1000);
-			System.out.println("今天平安的度過了。");
+			
+			SpeakUtil.speak("今天平安的度過了。");
 		}
 		
 	}
@@ -190,9 +190,9 @@ public class RandomMapUtil {
 //	}
 	
 	public void getIntoNewMap(Hero hero){
-		WaitUtil.wait(1000);
-		System.out.println(hero.getName()+"來到了"+my_map[hero.getX_index()][hero.getY_index()].getMap_name());
-		WaitUtil.wait(1000);
+		
+		SpeakUtil.speak(hero.getName()+"來到了"+my_map[hero.getX_index()][hero.getY_index()].getMap_name());
+		
 	}
 	
 	public void makeMap() {
@@ -203,7 +203,7 @@ public class RandomMapUtil {
 //		List<Integer> int_list = Arrays.asList(int_array);//他是參照原本的陣列，所以shuffled=之後兩個都會一起變
 //		Collections.shuffle(int_list);//list洗牌
 //		Integer[] new_int_list = int_list.toArray(new Integer[0]);//要傳入一個參數，告訴他要回傳成什麼類型
-		//測試System.out.println(int_list);
+		//測試SpeakUtil.speak(int_list);
 		
 		//step1 陣列洗牌
 		List<MyMap> map_list = new ArrayList<MyMap>();
@@ -240,7 +240,7 @@ public class RandomMapUtil {
 		} //隨機地圖成工!
 //		for(int a=0;a<3;a++) {
 //			for(int b=0;b<3;b++) {
-//				System.out.println(my_map[a][b].getId());
+//				SpeakUtil.speak(my_map[a][b].getId());
 //			}
 //		}
 

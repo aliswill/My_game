@@ -11,6 +11,7 @@ import Role.Hero;
 import Role.NPC;
 import Utils.FightUtil;
 import Utils.RandomMapUtil;
+import Utils.SpeakUtil;
 import Utils.StoreUtil;
 import Utils.WaitUtil;
 import monsters.FunnySnake;
@@ -38,7 +39,7 @@ public class TestMain {
 		int day=1;
 		
 		// TODO Auto-generated method stub
-		System.out.println("遊戲開始，請輸入你的英雄名：");		
+		SpeakUtil.speak("遊戲開始，請輸入你的英雄名：");		
 		Scanner scanner = new Scanner(System.in);
 		String name = scanner.next();
 		Hero hero = new Hero(name);
@@ -52,10 +53,10 @@ public class TestMain {
 		
 		while(day<=12) {
 			WaitUtil.wait(1000);
-			System.out.println("今天是第"+day+"天");
-			hero.meetGambler();
-			hero.meetTraveler(maputil);
-			hero.meetBeggar();
+			SpeakUtil.speak("今天是第"+day+"天");
+			//hero.meetGambler();
+			//hero.meetTraveler(maputil);
+			//hero.meetBeggar();
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
 				WaitUtil.wait(1000);
 				StoreUtil storeutil = new StoreUtil();
@@ -72,12 +73,12 @@ public class TestMain {
 				FightUtil fightutil= new FightUtil();
 				fightutil.fight(hero, monster);
 				if(!hero.isAlive_yn()) {
-					System.out.println("遊戲結束!請下次再挑戰");
+					SpeakUtil.speak("遊戲結束!請下次再挑戰");
 					break;
 				}
 			}else {
 				WaitUtil.wait(1000);
-				System.out.println("今天沒有遭遇怪物。");
+				SpeakUtil.speak("今天沒有遭遇怪物。");
 			}
 			maputil.getMapEvent(hero);
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
@@ -86,8 +87,8 @@ public class TestMain {
 				
 			}
 			WaitUtil.wait(1000);
-			System.out.println("--------------------------------------------");
-			System.out.println("今天"+hero.getName()+"的狀態值為:"+hero.toString());
+			SpeakUtil.speak("--------------------------------------------");
+			SpeakUtil.speak("今天"+hero.getName()+"的狀態值為:"+hero.toString());
 			day++;
 		}
 		
