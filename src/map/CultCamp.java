@@ -1,6 +1,8 @@
 package map;
 
 import Utils.EventComUtil;
+import monsters.CultLord;
+import monsters.CultPriest;
 import monsters.Monster;
 
 public class CultCamp extends MyMap{
@@ -10,7 +12,7 @@ public class CultCamp extends MyMap{
 		this.id=id;
 		this.map_level = 12;
 		this.map_name = "邪教營地";
-		this.monsters = new Monster[]{};
+		this.monsters = new Monster[]{new CultPriest(),new CultLord()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;
 		
@@ -33,7 +35,7 @@ public class CultCamp extends MyMap{
 	@Override
 	public void rebuild() {
 		// TODO Auto-generated method stub
-		
+		this.monsters = new Monster[]{new CultPriest(),new CultLord()};
 	}
 
 	

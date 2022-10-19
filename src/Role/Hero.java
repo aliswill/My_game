@@ -329,10 +329,35 @@ public class Hero {
 		boolean crit_yn = Math.random()>1-this.crit;
 		if(crit_yn==true) {
 			SpeakUtil.speak(1,this.name+"使出了憤怒一擊!");
-			return (int) ((this.atk+weapon_atk)*(0.45+Math.random())*1.5);//發生了爆擊
+			return (int) ((this.atk+weapon_atk)*(0.5+Math.random())*1.5);//發生了爆擊
 		}
 		else {
-			return (int) ((this.atk+this.weapon_atk)*(0.45+Math.random()));
+			return (int) ((this.atk+this.weapon_atk)*(0.5+Math.random()));
+		}
+	}
+	
+	public boolean escape() {
+		SpeakUtil.speak(2,this.name+"是否要嘗試逃跑? 請選擇: (W)是 (任意鍵):否");
+		Scanner sc = new Scanner(System.in);
+		String v = sc.next();
+		if(v.equalsIgnoreCase("w")) {
+			double i = Math.random();
+			if(i<0.3) {
+				SpeakUtil.speak(1,this.name+"成功逃跑了，但逃跑中不慎遺落了金錢");
+				int money_loss = (int)(this.money*0.2);
+				this.moneyChange(money_loss);
+				SpeakUtil.speak(1,this.name+"的金錢減少了:"+money_loss);
+				return false;
+			}else if(i<0.7){
+				SpeakUtil.speak(1,this.name+"成功逃跑了");
+				return false;
+			}else{
+				SpeakUtil.speak(1,"逃跑失敗!進入戰鬥!");
+				return true;
+			}
+			
+		}else {			
+			return true;
 		}
 	}
 	

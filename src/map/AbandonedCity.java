@@ -1,7 +1,9 @@
 package map;
 
 import Utils.EventComUtil;
+import monsters.BattleMachine;
 import monsters.Monster;
+import monsters.RelicGuard;
 
 public class AbandonedCity extends MyMap{
 	public AbandonedCity() {
@@ -9,7 +11,7 @@ public class AbandonedCity extends MyMap{
 		this.id=id;
 		this.map_level = 14;
 		this.map_name = "廢棄的古城";
-		this.monsters = new Monster[]{};
+		this.monsters = new Monster[]{new BattleMachine(),new RelicGuard()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;
 		
@@ -23,6 +25,6 @@ public class AbandonedCity extends MyMap{
 	@Override
 	public void rebuild() {
 		// TODO Auto-generated method stub
-		
+		this.monsters = new Monster[]{new BattleMachine(),new RelicGuard()};
 	}
 }

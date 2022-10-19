@@ -59,8 +59,8 @@ public class StoreUtil {
 	public void useStore(Hero hero,String welcome_yn) {
 		
 		if(welcome_yn.equalsIgnoreCase("Y")) {//開始購物
-			SpeakUtil.speak(1,"店主：歡迎光臨!請隨意挑選(按對應鍵購買，或按Z離開商店)");
-			SpeakUtil.speak(1,"Q:小混混的鋁棒(攻擊力1)(6元) || W:士兵用的劍(攻擊力3)(15元) || E:霸氣卍黑刃(攻擊力5)(30元) || R:鴨鴨神劍(攻擊力7)(50元)");
+			SpeakUtil.speak(2,"店主：歡迎光臨!請隨意挑選(按對應鍵購買，或按Z離開商店)");
+			SpeakUtil.speak(2,"Q:小混混的鋁棒(攻擊力1)(6元) || W:士兵用的劍(攻擊力3)(15元) || E:霸氣卍黑刃(攻擊力5)(30元) || R:鴨鴨神劍(攻擊力7)(50元)");
 			SpeakUtil.speak(2,"T:小混混的吊嘎(防禦力1)(6元) || Y:藍色POLO衫(防禦力2)(12元) || U:霸王卍神鎧(防禦力4)(25元) || I:鴨鴨布偶裝(防禦力7)(50元)" );
 			Scanner sc = new Scanner(System.in);
 			String v1 = sc.next();
@@ -94,8 +94,8 @@ public class StoreUtil {
 			v = sc.next();
 		}
 		if(v.equalsIgnoreCase("Y")) {//開始購物
-			SpeakUtil.speak(1,"想找什麼樣的旅店呢? (按對應鍵入住，或按Z離開)");
-			SpeakUtil.speak(1,"Q:歇腳的旅店(恢復少量生命值，一晚5元) W:闊氣的旅店(恢復較多生命值，一晚10元)");
+			SpeakUtil.speak(2,"想找什麼樣的旅店呢? (按對應鍵入住，或按Z離開)");
+			SpeakUtil.speak(2,"Q:歇腳的旅店(恢復少量生命值，一晚5元) W:闊氣的旅店(恢復較多生命值，一晚10元)");
 			SpeakUtil.speak(2,"E:溫泉會館(恢復少量生命值與魔法力，一晚10元)" );
 			String v1 = sc.next();
 			while(!v1.equalsIgnoreCase("Q")&&!v1.equalsIgnoreCase("W")&&!v1.equalsIgnoreCase("E")&&!v1.equalsIgnoreCase("Z")) {
@@ -162,10 +162,11 @@ public class StoreUtil {
 					SpeakUtil.speak(1,hero.getName()+"裝備了"+commodity.getCom_name()+","+hero.getName()+"的裝備防禦力變為:"+hero.getEqu_def());
 				}
 			
-		}else {
-			SpeakUtil.speak(1,"金錢不足!");
 		}
+	}else {
+		SpeakUtil.speak(1,"金錢不足!");
 	}
 	
-	}}
+	}
+	}
 

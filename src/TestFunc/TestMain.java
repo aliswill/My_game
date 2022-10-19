@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Role.Hero;
+import Role.NPCTrader;
 import Utils.FightUtil;
 import Utils.RandomMapUtil;
 import Utils.SpeakUtil;
@@ -39,19 +40,18 @@ public class TestMain {
 		String name = scanner.next();
 		Hero hero = new Hero(name);
 		
-		
+		NPCTrader a = new NPCTrader(hero);
+		a.appear();
 		
 		RandomMapUtil maputil = new RandomMapUtil();
 		maputil.makeMap();
 		maputil.reLocateHero(hero);
-		//maputil.getIntoNewMap(hero);
+		
 		
 		while(day<=12) {
 			
 			SpeakUtil.speak(1,"今天是第"+day+"天");
-			//hero.meetGambler();
-			//hero.meetTraveler(maputil);
-			//hero.meetBeggar();
+	
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
 				
 				StoreUtil storeutil = new StoreUtil();
@@ -65,17 +65,24 @@ public class TestMain {
 				Monster monster = maputil.getMapMonster(hero);
 				SpeakUtil.speak(1,name+"遭遇了等級"+monster.getMonster_level()+"的"+monster.getName()+"!");
 				SpeakUtil.speak(1,monster.toString());
-				FightUtil fightutil= new FightUtil();
-				fightutil.fight(hero, monster);
-				if(!hero.isAlive_yn()) {
-					SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-					break;
+				if(hero.escape()) {
+					FightUtil fightutil= new FightUtil();
+					fightutil.fight(hero, monster);
+					if(!hero.isAlive_yn()) {
+						SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+						break;
+					}
 				}
+				
 			}else {
 				
 				SpeakUtil.speak(1,"今天沒有遭遇怪物。");
 			}
 			maputil.getMapEvent(hero);
+			if(!hero.isAlive_yn()) {
+				SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+				break;
+			}
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
 				StoreUtil storeutil = new StoreUtil();
 				storeutil.useHotel(hero);
