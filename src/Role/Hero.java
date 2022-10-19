@@ -1,10 +1,15 @@
 package Role;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
+import Items.Item;
 import Utils.CheckType;
 import Utils.EventComUtil;
 import Utils.FightUtil;
@@ -36,7 +41,7 @@ public class Hero {
 	private int exp_needed;
 	private double crit;//爆擊率
 	private int max_magic;
-	
+	private Map<String,Item> Items;
 	
 	
 //	@Override
@@ -72,6 +77,7 @@ public class Hero {
 		this.exp=0;
 		this.money = 10;
 		this.exp_needed = 5;
+		this.Items = new HashMap<String,Item>();
 	}
 	
 	
@@ -82,49 +88,50 @@ public class Hero {
 		switch(event_type){//1:金錢 2:atk 3:def 4:dex 5:血量 6:物品損失 7:取得物品(攻擊力) 8:取得物品(防禦力) 9:魔法力 10:全能力值(代價)
 			case 1:
 				this.money+=final_value;
-				SpeakUtil.speak(this.name+"的金錢變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的金錢變化量:"+final_value);
 				break;
 			case 2:
 				this.atk+=final_value;
-				SpeakUtil.speak(this.name+"的ATK變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的ATK變化量:"+final_value);
 				break;
 			case 3:
 				this.def+=final_value;
-				SpeakUtil.speak(this.name+"的DEF變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的DEF變化量:"+final_value);
 				break;
 			case 4:
 				this.dex+=final_value;
-				SpeakUtil.speak(this.name+"的DEX變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的DEX變化量:"+final_value);
 				break;
 			case 5:
 				final_value = Math.min(this.max_life-this.life,final_value);
 				this.life+=final_value;
-				SpeakUtil.speak(this.name+"的血量變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的血量變化量:"+final_value);
 				break;
 			case 6:
 				this.weapon_atk=0;
 				this.equ_def=0;
-				SpeakUtil.speak(this.name+"的裝備被劫掠一空了!");
+				SpeakUtil.speak(1,this.name+"的裝備被劫掠一空了!");
+				break;
 			case 7:
 				if(this.weapon_atk<final_value) {
-					SpeakUtil.speak(this.name+"穿上了撿到的裝備!");
+					SpeakUtil.speak(1,this.name+"穿上了撿到的裝備!");
 					this.weapon_atk=final_value;
 				}else {
-					SpeakUtil.speak(this.name+"覺得自己身上的武器比較好，因此把它留在原地就走了");
+					SpeakUtil.speak(1,this.name+"覺得自己身上的武器比較好，因此把它留在原地就走了");
 				}
 				break;
 			case 8:
 				if(this.equ_def<final_value) {
-					SpeakUtil.speak(this.name+"穿上了撿到的裝備!");
+					SpeakUtil.speak(1,this.name+"穿上了撿到的裝備!");
 					this.equ_def=final_value;
 				}else {
-					SpeakUtil.speak(this.name+"覺得自己身上的裝備比較好，因此把它留在原地就走了");
+					SpeakUtil.speak(1,this.name+"覺得自己身上的裝備比較好，因此把它留在原地就走了");
 				}
 				break;
 			case 9:
 				final_value = Math.min(this.max_magic-this.magic,final_value);
 				this.magic+=final_value;
-				SpeakUtil.speak(this.name+"的魔法力變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的魔法力變化量:"+final_value);
 				break;
 			case 10:
 				this.atk+=final_value;
@@ -134,88 +141,124 @@ public class Hero {
 				if(this.life>this.max_life) {
 					this.life=this.max_life;
 				}
-				SpeakUtil.speak(this.name+"的攻擊力變化量:"+final_value);
-				SpeakUtil.speak(this.name+"的防禦力變化量:"+final_value);
-				SpeakUtil.speak(this.name+"的敏捷力變化量:"+final_value);
-				SpeakUtil.speak(this.name+"的某個能力似乎下降了?");
+				SpeakUtil.speak(1,this.name+"的攻擊力變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的防禦力變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的敏捷力變化量:"+final_value);
+				SpeakUtil.speak(1,this.name+"的某個能力似乎下降了?");
 				break;
 		}
 	}
 	
-	public void move() {
+	public void getNewItem(Item item) {
+		this.Items.putIfAbsent(item.getItem_name(), item);
+		SpeakUtil.speak(1,name+"得到了"+item.getItem_name());
+	}
+	
+	
+	public boolean haveItemYN(String item_name) {
+		if(this.Items.keySet().contains(item_name)) {//檢查是否有指定物品
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public void move(RandomMapUtil maputil) {
 		
-		SpeakUtil.speak("今天想往哪個方向移動?");
+		SpeakUtil.speak(2,"今天想往哪個方向移動?");
 		boolean north=y_index>0;
 		boolean west=x_index>0;
 		boolean south=y_index<2;
 		boolean east=x_index<2;
 		List<String> s = new ArrayList<>();
+		System.out.print("留在原地(Q) ");
+		s.add("Q");
+		s.add("q");
 		if(north) 
 		{
-			s.add("北");
-			System.out.print("北 ");
+			s.add("W");
+			s.add("w");
+			System.out.print("北(W) ");
 			}
 		if(west) 
 		{
-			s.add("西");
-			System.out.print("西 ");
+			s.add("A");
+			s.add("a");
+			System.out.print("西(A) ");
 			}
 		if(south) 
 		{
-			s.add("南");
-			System.out.print("南 ");
+			s.add("S");
+			s.add("s");
+			System.out.print("南(S) ");
 		}
 		if(east) 
 		{
-			s.add("東");
-			System.out.print("東 ");
+			s.add("D");
+			s.add("d");
+			System.out.print("東(D) ");
 		}
 		
 		Scanner sc = new Scanner(System.in);
 		String direction = sc.next();
 		while(!s.contains(direction)) {
-			SpeakUtil.speak("請輸入想移動的方向");
+			SpeakUtil.speak(2,"請輸入想移動的方向");
 			direction = sc.next();
 		}
 		
-		if(direction.equals("北")) { //文字要用equals!
-			
-			SpeakUtil.speak(this.name+"向北移動了一格");
+		if(direction.equalsIgnoreCase("w")) { //文字要用equals!		
+			SpeakUtil.speak(1,this.name+"向北移動了一格");
 			y_index--;
+			if(!maputil.approachable(this)) {
+				y_index++;
 			}
-		else if(direction.equals("東")) {
-			SpeakUtil.speak(this.name+"向東移動了一格");
+			
+			}
+		else if(direction.equalsIgnoreCase("d")) {
+			SpeakUtil.speak(1,this.name+"向東移動了一格");
 			x_index++;
+			if(!maputil.approachable(this)) {
+				x_index--;
 			}
-		else if(direction.equals("南")) {
-			SpeakUtil.speak(this.name+"向南移動了一格");
+			}
+		else if(direction.equalsIgnoreCase("s")) {
+			SpeakUtil.speak(1,this.name+"向南移動了一格");
 			y_index++;
+			if(!maputil.approachable(this)) {
+				y_index--;
 			}
-		else if(direction.equals("西")) {
-			SpeakUtil.speak(this.name+"向西移動了一格");
-			x_index--;}	
+			}
+		else if(direction.equalsIgnoreCase("a")) {
+			SpeakUtil.speak(1,this.name+"向西移動了一格");
+			x_index--;
+			if(!maputil.approachable(this)) {
+				x_index++;
+			}
+			
+		}else if(direction.equalsIgnoreCase("q")) {
+			SpeakUtil.speak(1,this.name+"停留在了原地");
+		}
 		}
 	
 	
 	public void getPosition() {
-		SpeakUtil.speak("當前在"+x_index+","+y_index);
+		SpeakUtil.speak(1,"當前在"+x_index+","+y_index);
 	}
 	
 	
 	public void getMoney(int mon_money) {
 		this.money+=mon_money;
-		SpeakUtil.speak(this.name+"的金錢增加了"+mon_money);
+		SpeakUtil.speak(1,this.name+"的金錢增加了"+mon_money);
 	}
 	
 	public void newLevelWish() {
-		SpeakUtil.speak(name+"等級提升，受到冒險之神的眷顧，可以許一個願望，請選擇：");
-		SpeakUtil.speak("Q:生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
-		SpeakUtil.speak("W:提升攻擊力、防禦力、敏捷力各3點");
-		SpeakUtil.speak("E:提升隨機能力值10點(最大生命值/最大魔法值/攻擊/防禦/敏捷/爆擊)");
+		SpeakUtil.speak(1,name+"等級提升，受到冒險之神的眷顧，可以許一個願望，請選擇：");
+		SpeakUtil.speak(1,"Q:生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
+		SpeakUtil.speak(1,"W:提升攻擊力、防禦力、敏捷力各3點");
+		SpeakUtil.speak(2,"E:提升隨機能力值10點(最大生命值/最大魔法值/攻擊/防禦/敏捷/爆擊)");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
 		while(!v.equalsIgnoreCase("Q")&&!v.equalsIgnoreCase("W")&&!v.equalsIgnoreCase("E")) {
-			SpeakUtil.speak("(請輸入對應按鍵)");
+			SpeakUtil.speak(2,"(請輸入對應按鍵)");
 			v = sc.next();
 		}
 		if(v.equalsIgnoreCase("Q")) {
@@ -268,11 +311,11 @@ public class Hero {
 			this.exp=last_exp;
 			this.exp_needed+=5;
 			newLevelWish();
-			SpeakUtil.speak(this.name+"升到"+this.level+"級了!");
+			SpeakUtil.speak(1,this.name+"升到"+this.level+"級了!");
 			
-			SpeakUtil.speak(this.name+"的能力值變為：");
+			SpeakUtil.speak(1,this.name+"的能力值變為：");
 			
-			SpeakUtil.speak(this.toString());
+			SpeakUtil.speak(1,this.toString());
 		}
 	}
 	
@@ -285,7 +328,7 @@ public class Hero {
 	public int attack() {
 		boolean crit_yn = Math.random()>1-this.crit;
 		if(crit_yn==true) {
-			SpeakUtil.speak(this.name+"使出了憤怒一擊!");
+			SpeakUtil.speak(1,this.name+"使出了憤怒一擊!");
 			return (int) ((this.atk+weapon_atk)*(0.45+Math.random())*1.5);//發生了爆擊
 		}
 		else {
@@ -299,145 +342,13 @@ public class Hero {
 		
 		if(this.life<=0) {			
 			this.alive_yn=false;
-			SpeakUtil.speak(this.name+"受到了"+damage+"點傷害，並且無力的倒下了。勝敗乃兵家常事，請再接再厲!");
+			SpeakUtil.speak(1,this.name+"受到了"+damage+"點傷害，並且無力的倒下了。勝敗乃兵家常事，請再接再厲!");
 			return damage;
 		}
-		SpeakUtil.speak(this.name+"受到了"+damage+"點傷害  (剩餘血量"+this.life+")");
+		SpeakUtil.speak(1,this.name+"受到了"+damage+"點傷害  (剩餘血量"+this.life+")");
 		return damage;
 	}
-
-//	public void meetBeggar() {
-//		SpeakUtil.speak("一名乞丐蜷曲著雙腿對你乞討");
-//		
-//		SpeakUtil.speak("請選擇：　W:給他錢 E:搶他碗裡的錢 任意鍵:無視");
-//		Scanner sc = new Scanner(System.in);
-//		String v = sc.next();
-//		if(v.equalsIgnoreCase("w")) {
-//			int gived_money = (int)(this.money*0.3);
-//			if(gived_money>0) {
-//				SpeakUtil.speak(this.name+"給了乞丐"+gived_money+"元");
-//				
-//				SpeakUtil.speak("乞丐感激地收下了錢");
-//				
-//				SpeakUtil.speak("乞丐:謝謝你的幫助，好心的旅人，其實我年輕時也喜歡到各地冒險，我教給你一些防身的技巧如何?");
-//				
-//				this.atk+=1;
-//				SpeakUtil.speak(this.name+"的攻擊力提升了1");
-//			}else {
-//				SpeakUtil.speak(this.name+"沒有錢可以給乞丐...");
-//			}
-//			
-//		}else if(v.equalsIgnoreCase("e")) {
-//			SpeakUtil.speak(this.name+"伸手要搶乞丐碗裡的幾個銅板");
-//			
-//			SpeakUtil.speak("乞丐:真是世風日下啊!是你先對我不仁，休怪我了!");
-//			
-//			Monster monster = new Beggar();
-//			SpeakUtil.speak(this.name+"遭遇了等級"+monster.getMonster_level()+"的"+monster.getName()+"!");
-//			SpeakUtil.speak(monster.toString());
-//			FightUtil fightutil= new FightUtil();
-//			fightutil.fight(this, monster);
-//			if(!this.isAlive_yn()) {
-//				SpeakUtil.speak("乞丐：年輕人，我給你一次機會，下次不要在幹這種缺德事了");
-//				this.setAlive_yn(true);
-//				this.setLife(1);
-//				SpeakUtil.speak(this.name+"的生命值剩餘1");
-//			}
-//		}else {
-//			SpeakUtil.speak("("+this.name+"無視了他");
-//			
-//		}		
-//	}
-//	
-//	public void meetTraveler(RandomMapUtil maputil) {
-//			
-//			SpeakUtil.speak("前方出現一名狼狽不堪的旅行者，全身都是汙跡跟血漬");
-//			
-//			SpeakUtil.speak("請選擇：　W:嘲笑他  E:遞給他水喝 任意鍵:無視");
-//			Scanner sc = new Scanner(System.in);
-//			String v = sc.next();
-//			if(v.equalsIgnoreCase("w")) {
-//				SpeakUtil.speak(this.name+":你怎麼搞的這麼狼狽啊~沒實力還是別出來冒險吧哈哈");
-//				
-//				SpeakUtil.speak("狼狽不堪的旅行者瞪了一眼"+this.name+"並踱著緩步走了");
-//			}else if(v.equalsIgnoreCase("e")) {
-//				SpeakUtil.speak("狼狽不堪的旅行者：謝謝你啊~你也是旅行者吧?");
-//				
-//				SpeakUtil.speak("狼狽不堪的旅行者：其實啊..我剛剛從"+ maputil.getDanagerousDirection(this)+"方而來");
-//				
-//				SpeakUtil.speak("狼狽不堪的旅行者：那裏的敵人都特別強大，你最好不要往那邊走");
-//				
-//				SpeakUtil.speak("狼狽不堪的旅行者：那麼再會了，謝謝你的茶水~");
-//			}else {
-//				SpeakUtil.speak("("+this.name+"無視了他)");
-//				
-//				SpeakUtil.speak("旅行者步履蹣跚地走了");
-//			}		
-//		}
-//	
-//	
-//	public void meetGambler() {
-//		SpeakUtil.speak("一名穿著名貴西裝的男人主動走過來向你搭話");
-//		
-//		SpeakUtil.speak("穿西裝的男人:唷~旅行者，每天冒險的日子不累嗎?");
-//		
-//		SpeakUtil.speak("穿西裝的男人:想不想嘗試輕輕鬆鬆賺快錢的方法?");
-//		
-//		SpeakUtil.speak("請選擇：　W:想!非常想 E:什麼方法? 任意鍵:不想。");
-//		Scanner sc = new Scanner(System.in);
-//		String v = sc.next();
-//		if(v.equalsIgnoreCase("w")||v.equalsIgnoreCase("e")) {
-//			SpeakUtil.speak("穿西裝的男人:有興趣就對啦~很簡單的!");
-//			
-//			SpeakUtil.speak("穿西裝的男人:我寫下1~25中的一個數字，給你三次機會，只要你猜中了，我就把賭本貼三倍給你，如何?");
-//			
-//			SpeakUtil.speak("穿西裝的男人:猜錯的時候我也會給你提示，來吧~你想押多少");
-//			
-//			SpeakUtil.speak("請選擇：　W:身上一半的錢 E:身上全部的錢 任意鍵:不押，賭博是不好的");
-//			String v1 = sc.next();
-//			if(this.money<2) {
-//				SpeakUtil.speak(this.name+":抱歉..我身上錢不夠..");
-//			}
-//			else if(v1.equalsIgnoreCase("w")){
-//				int gam_num = (int) (this.money*0.5);
-//				if(playGuessNumber()) {
-//					this.money+=(gam_num*2);
-//					
-//					SpeakUtil.speak(this.name+"的金錢變為:"+this.money);
-//				}else {
-//					this.money-=gam_num;
-//					
-//					SpeakUtil.speak(this.name+"的金錢變為:"+this.money);
-//				}
-//				
-//			}else if(v1.equalsIgnoreCase("e")) {
-//				int gam_num = this.money;
-//				if(playGuessNumber()) {
-//					this.money+=(gam_num*2);
-//					
-//					SpeakUtil.speak(this.name+"的金錢變為:"+this.money);
-//				}else {
-//					this.money-=gam_num;
-//					
-//					SpeakUtil.speak(this.name+"的金錢變為:"+this.money);
-//				}
-//			}else {
-//				SpeakUtil.speak("穿西裝的男人:是你自己讓機會溜走的~別後悔啊");
-//			}
-//		}else {
-//			SpeakUtil.speak("穿西裝的男人:诶~真冷淡耶~");
-//			
-//			SpeakUtil.speak("穿西裝的男人:改變心意記得跟我說喔!");
-//		}
-//	}
 	
-	
-	
-	public void meetInformationVendor() {
-		SpeakUtil.speak("");
-		
-		SpeakUtil.speak("");
-	}
 	
 	public String getName() {
 		return name;

@@ -14,7 +14,7 @@ public class FightUtil {
 			
 			if(is_hero_attack(hero.getDex(),monster.getDex())) {//英雄攻擊
 				//目標設計多種指令:1.攻擊 2.使用咒文 3.逃跑(僅在戰鬥一開始可以跑)
-				SpeakUtil.speak(hero.getName()+"用力的揍了"+monster.getName());
+				SpeakUtil.speak(2,hero.getName()+"用力的揍了"+monster.getName());
 				monster.hurt(hero);
 				if(!monster.getAliveYN()) {
 				hero.getExperience(monster.getExp());

@@ -22,10 +22,9 @@ public abstract class MyMap {
 	
 	public abstract void rebuild();
 	
-	public void view() {
+	public void addViewTime() {
 		this.view_time++;
 	}
-	
 	
 	public int getMonster_num() {
 		return monster_num;

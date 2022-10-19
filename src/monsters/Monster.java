@@ -1,6 +1,7 @@
 package monsters;
 
 import Role.Hero;
+import Utils.SpeakUtil;
 
 public abstract class Monster {
 
@@ -67,11 +68,11 @@ public abstract class Monster {
 		this.life = this.life-damage;		
 		if(this.life<=0) {			
 			this.alive_yn=false;
-			System.out.println(this.monster_name+"受到了"+damage+"點傷害，並且無力的倒下了。");
-			System.out.println(hero.getName()+"獲得了"+this.exp+"點經驗值");
+			SpeakUtil.speak(1,this.monster_name+"受到了"+damage+"點傷害，並且無力的倒下了。");
+			SpeakUtil.speak(1,hero.getName()+"獲得了"+this.exp+"點經驗值");
 			return damage;
 		}
-		System.out.println(this.monster_name+"受到了"+damage+"點傷害"+" (剩餘血量"+this.life+")");
+		SpeakUtil.speak(1,this.monster_name+"受到了"+damage+"點傷害"+" (剩餘血量"+this.life+")");
 		return damage;
 	}
 

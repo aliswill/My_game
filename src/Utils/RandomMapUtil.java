@@ -107,7 +107,7 @@ public class RandomMapUtil {
 		for(int x=0;x<3;x++) {
 			for(int y=0;y<3;y++) {
 				if(my_map[x][y].getMap_name().equals("平凡的小鎮")){
-					SpeakUtil.speak(hero.getName()+"是一名嚮往充滿挑戰性的生活的冒險家，他將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
+					SpeakUtil.speak(1,hero.getName()+"是一名嚮往充滿挑戰性的生活的冒險家，他將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
 					hero.setLocation(x, y);
 				}
 			}
@@ -119,21 +119,37 @@ public class RandomMapUtil {
 		return cur_map;
 	}
 	
+	public boolean approachable(Hero hero) {
+		if(getCurrentMap(hero).getMap_name().equals("皇家的禁地")) {
+			if(hero.haveItemYN("國王的許可證")) {
+				//有指定道具才能進入
+				SpeakUtil.speak(1,hero.getName()+"出示了國王的許可證，守衛便打開了門");
+				return true;
+			}else {
+				SpeakUtil.speak(1,"前方被重重高牆圍起，戒備森嚴，似乎是無法進入的地區?");
+				SpeakUtil.speak(1,hero.getName()+"被迫停在原地");
+				return false;				
+			}
+		}else {
+			return true;
+		}
+	}
+	
 	public void getMapEvent(Hero hero) {//決定該地圖發生的事件
 		if(EventHappenedYn()) {
 			
-			SpeakUtil.speak("發生了突發事件!");
+			SpeakUtil.speak(1,"發生了突發事件!");
 			
 			cur_map = my_map[hero.getX_index()][hero.getY_index()];
 			int map_event_num = cur_map.getEvent_num();
 			double v = Math.random()*100;
 			int event_index = (int)(v/(100/map_event_num));
 			EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);
-			SpeakUtil.speak(hero.getName()+eventComUtil.getEvent_describe());
+			SpeakUtil.speak(1,hero.getName()+eventComUtil.getEvent_describe());
 			hero.getEventEffect(eventComUtil.getGood_or_bad_type(),(int)(eventComUtil.getOrigin_value()*cur_map.getEffect_param()),eventComUtil.getEvent_type());//好事壞事/影響值/事件類型
 		}else {
 			
-			SpeakUtil.speak("今天平安的度過了。");
+			SpeakUtil.speak(1,"今天平安的度過了。");
 		}
 		
 	}
@@ -158,6 +174,7 @@ public class RandomMapUtil {
 		double v = Math.random();
 		return v<=this.mon_ratio;
 	}
+	
 	
 //	public void getMapEvent(Hero hero) { //這個方法會先決定好事還是壞事
 //		cur_map = my_map[hero.getX_index()][hero.getY_index()];
@@ -190,8 +207,8 @@ public class RandomMapUtil {
 //	}
 	
 	public void getIntoNewMap(Hero hero){
-		
-		SpeakUtil.speak(hero.getName()+"來到了"+my_map[hero.getX_index()][hero.getY_index()].getMap_name());
+		my_map[hero.getX_index()][hero.getY_index()].addViewTime();
+		SpeakUtil.speak(1,hero.getName()+"來到了"+my_map[hero.getX_index()][hero.getY_index()].getMap_name());
 		
 	}
 	
