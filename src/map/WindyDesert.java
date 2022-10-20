@@ -13,7 +13,7 @@ public class WindyDesert extends MyMap{
 		super();
 		this.id=id;
 		this.map_level = 7;
-		this.map_name = "狂風的沙地";
+		this.map_name = "月蝕沙漠";
 		this.monsters = new Monster[]{new SilencedTraveler(),new CrazyWindy()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;

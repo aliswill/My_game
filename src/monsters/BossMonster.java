@@ -4,7 +4,7 @@ import Items.Item;
 import Role.Hero;
 import Utils.SpeakUtil;
 
-public abstract class Monster {
+public abstract class BossMonster {
 
 	protected String monster_name;
 	protected int monster_level;
@@ -20,7 +20,7 @@ public abstract class Monster {
 	protected int money;
 	protected String atk_style;
 	protected double crit;
-
+	protected Item drop_item;
 	
 	//public abstract int magic_atk(); 
 	
@@ -40,28 +40,19 @@ public abstract class Monster {
 		}
 	}
 	
-
-
-//	@Override
-//	public String toString() {
-//		return monster_name+" 的狀態為：生命值：" + life + ",魔法力：" + magic + ",攻擊力：" + atk + ",防禦力:" + def + ",魔法攻擊力:" + ats + ",魔法防禦力:"
-//				+ ""
-//				+ res + ",敏捷力：" + dex ;
-//	}
 	
-
-
+	public Item getDrop_item() {
+		return drop_item;
+	}
 
 	public String toString() {
 		return monster_name+" 的狀態為：生命值：" + life + ",攻擊力：" + atk + ",防禦力:" + def +  ",敏捷力：" + dex ;
 	}
 	
-	
-	
+		
 	public int getMoney() {
 		return money;
 	}
-
 
 	public int getMonster_level() {
 		return monster_level;

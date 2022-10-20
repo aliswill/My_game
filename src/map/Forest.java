@@ -12,7 +12,7 @@ public class Forest extends MyMap {
 		super();
 		this.id=id;
 		this.map_level = 4;
-		this.map_name = "迷幻的森林";
+		this.map_name = "迷宮森林";
 		this.monsters = new Monster[]{new MagicFairy()};//待補
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;

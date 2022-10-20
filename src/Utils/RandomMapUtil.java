@@ -175,6 +175,7 @@ public class RandomMapUtil {
 		return v<=this.mon_ratio;
 	}
 	
+
 	
 //	public void getMapEvent(Hero hero) { //這個方法會先決定好事還是壞事
 //		cur_map = my_map[hero.getX_index()][hero.getY_index()];

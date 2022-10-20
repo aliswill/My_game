@@ -19,7 +19,7 @@ public class NPCGambler implements NPCrole {
 	@Override
 	public void appear() {
 		// TODO Auto-generated method stub
-		SpeakUtil.speak(1,"一名穿著名貴西裝的男人主動走過來向你搭話");
+		SpeakUtil.speak(1,"(一名穿著名貴西裝的男人主動走過來向你搭話)");
 		
 		SpeakUtil.speak(1,"穿西裝的男人:唷~旅行者，每天冒險的日子不累嗎?");
 		

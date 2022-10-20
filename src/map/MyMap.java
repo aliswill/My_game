@@ -3,6 +3,7 @@ package map;
 import java.util.Map;
 
 import Utils.EventComUtil;
+import monsters.BossMonster;
 import monsters.Monster;
 
 public abstract class MyMap {
@@ -18,7 +19,7 @@ public abstract class MyMap {
 	protected int monster_num;
 //	protected Map<Integer,String> good_event_type;//依照拜訪次數決定事件名稱
 //	protected Map<Integer,String> bad_event_type;
-
+	protected BossMonster boss;
 	
 	public abstract void rebuild();
 	
@@ -35,6 +36,11 @@ public abstract class MyMap {
 		return eventComUtil[i];
 	}
 	
+	
+	
+	public BossMonster getBoss() {
+		return boss;
+	}
 
 	public double getEffect_param() {
 		return effect_param;

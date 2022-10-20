@@ -2,6 +2,7 @@ package map;
 
 import Utils.EventComUtil;
 import monsters.Bastard;
+import monsters.BossSeaBeast;
 import monsters.EvilDog;
 import monsters.Monster;
 import monsters.Siren;
@@ -13,10 +14,11 @@ public class DeepOcean extends MyMap {
 		super();
 		this.id=id;
 		this.map_level = 10;
-		this.map_name = "深海的地宮";
+		this.map_name = "大澳灣";
 		this.monsters = new Monster[]{new WhaleKiller(),new Siren()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;
+		this.boss= new BossSeaBeast();
 		
 		this.eventComUtil = new EventComUtil[] {
 				new EventComUtil(1,0,1,"撿到了閃閃發光的珍珠，似乎滿值錢的",20)//好事/無特殊條件/金錢類事件/影響值

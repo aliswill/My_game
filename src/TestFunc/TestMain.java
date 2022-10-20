@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Role.Hero;
+import Role.NPCPoet;
 import Role.NPCTrader;
 import Utils.FightUtil;
 import Utils.RandomMapUtil;
@@ -40,13 +41,16 @@ public class TestMain {
 		String name = scanner.next();
 		Hero hero = new Hero(name);
 		
-		NPCTrader a = new NPCTrader(hero);
-		a.appear();
+	
 		
 		RandomMapUtil maputil = new RandomMapUtil();
 		maputil.makeMap();
 		maputil.reLocateHero(hero);
 		
+		NPCTrader a = new NPCTrader(hero);
+		NPCPoet b = new NPCPoet(hero,maputil);
+		b.appear();
+		a.appear();
 		
 		while(day<=12) {
 			
