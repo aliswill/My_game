@@ -14,9 +14,9 @@ public class Town extends MyMap {
 	 * =>如果在各個地圖類建立一個產生怪物的方法，分別給monster[]賦值，這需要分別寫在每個類中，因為父類不會知道各個子類的怪物類別，可是如果寫在子類，那MyMap型態是不能呼叫的
 	 * 
 	 */
-	public Town(int id) {
+	public Town() {
 		super();
-		this.id=id;
+		this.id=1;
 		this.map_level = 1;
 		this.map_name = "平凡的小鎮";
 		this.monsters = new Monster[]{new EvilDog(),new Bastard()};

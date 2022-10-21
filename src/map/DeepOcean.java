@@ -12,7 +12,7 @@ public class DeepOcean extends MyMap {
 
 	public DeepOcean() {
 		super();
-		this.id=id;
+		this.id=6;
 		this.map_level = 10;
 		this.map_name = "大澳灣";
 		this.monsters = new Monster[]{new WhaleKiller(),new Siren()};

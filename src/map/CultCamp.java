@@ -9,7 +9,7 @@ public class CultCamp extends MyMap{
 
 	public CultCamp() {
 		super();
-		this.id=id;
+		this.id=7;
 		this.map_level = 12;
 		this.map_name = "邪教營地";
 		this.monsters = new Monster[]{new CultPriest(),new CultLord()};

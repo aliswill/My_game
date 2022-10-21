@@ -8,7 +8,7 @@ import monsters.RelicGuard;
 public class AbandonedCity extends MyMap{
 	public AbandonedCity() {
 		super();
-		this.id=id;
+		this.id=8;
 		this.map_level = 14;
 		this.map_name = "廢棄古城";
 		this.monsters = new Monster[]{new BattleMachine(),new RelicGuard()};

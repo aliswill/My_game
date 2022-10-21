@@ -56,7 +56,7 @@ public class TestMain {
 			
 			SpeakUtil.speak(1,"今天是第"+day+"天");
 	
-			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
+			if(maputil.getCurrentMap(hero).getId()==1) {
 				
 				StoreUtil storeutil = new StoreUtil();
 				String welcome_yn = storeutil.welcomStore();

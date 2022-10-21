@@ -9,7 +9,7 @@ public class RoyalForbiddenArea extends MyMap {
 
 	public RoyalForbiddenArea() {
 		super();
-		this.id=id;
+		this.id=9;
 		this.map_level = 16;
 		this.map_name = "皇家的禁地";
 		this.monsters = new Monster[]{new MagicFairy()};//待補

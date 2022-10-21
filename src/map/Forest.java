@@ -10,7 +10,7 @@ import monsters.Monster;
 public class Forest extends MyMap {
 	public Forest() {
 		super();
-		this.id=id;
+		this.id=3;
 		this.map_level = 4;
 		this.map_name = "迷宮森林";
 		this.monsters = new Monster[]{new MagicFairy()};//待補

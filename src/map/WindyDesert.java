@@ -9,9 +9,9 @@ import monsters.SilencedTraveler;
 
 public class WindyDesert extends MyMap{
 
-	public WindyDesert(int id) {
+	public WindyDesert() {
 		super();
-		this.id=id;
+		this.id=5;
 		this.map_level = 7;
 		this.map_name = "月蝕沙漠";
 		this.monsters = new Monster[]{new SilencedTraveler(),new CrazyWindy()};

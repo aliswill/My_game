@@ -9,9 +9,9 @@ import monsters.StrongBear;
 
 public class Hill extends MyMap {
 	
-	public Hill(int id) {
+	public Hill() {
 		super();
-		this.id=id;
+		this.id=2;
 		this.map_level = 3;
 		this.map_name = "野性山丘";
 		this.monsters = new Monster[]{new FunnySnake(),new StrongBear()};

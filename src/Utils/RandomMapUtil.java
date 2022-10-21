@@ -226,14 +226,14 @@ public class RandomMapUtil {
 		//step1 陣列洗牌
 		List<MyMap> map_list = new ArrayList<MyMap>();
 		
-		map_list.add(new Town(1));//臨時用**********要件入真正的地圖
+		map_list.add(new Town());//臨時用**********要件入真正的地圖
 		map_list.add(new Forest());
 		map_list.add(new AbandonedCity());
 		map_list.add(new CultCamp());
 		map_list.add(new OldTomb());
-		map_list.add(new Hill(1));
+		map_list.add(new Hill());
 		map_list.add(new RoyalForbiddenArea());
-		map_list.add(new WindyDesert(1));
+		map_list.add(new WindyDesert());
 		map_list.add(new DeepOcean());
 		
 		Collections.shuffle(map_list);//list洗牌

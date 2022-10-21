@@ -12,7 +12,7 @@ public class OldTomb extends MyMap{
 	
 	public OldTomb() {
 		super();
-		this.id=id;
+		this.id=4;
 		this.map_level = 5;
 		this.map_name = "古戰場的墓地";
 		this.monsters = new Monster[]{new SkeletonArmy(),new GhostFire()};
