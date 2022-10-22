@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import Items.Item;
 import Utils.Commodity;
 import Utils.SpeakUtil;
 import map.CultCamp;
@@ -74,12 +75,12 @@ private List<Integer> appearMap;
 			}else if(commodities.keySet().contains(v1)) {
 				Commodity c = commodities.get(v1);
 				buy(hero,c);
-				SpeakUtil.speak(2,"旅行商人:這可是難得的寶貝，你真識貨!要再挑些嗎? (請輸入Y/N)");
+				SpeakUtil.speak(2,"旅行商人:這可是難得的寶貝，你真識貨!要再挑些嗎? (Y:要 任意鍵:不要)");
 				String v2 = sc.next();
 				useStore(hero,v2);
 			}
 			
-		}else if(welcome_yn.equals("N")) {
+		}else{
 			SpeakUtil.speak(1,"旅行商人:真可惜~過了這個村就沒這個店啦~");
 			//do nothing
 		}
@@ -104,6 +105,7 @@ private List<Integer> appearMap;
 		}else if(commodity.getCom_type()==3) {
 			hero.setMoney(hero.getMoney()-commodity.getPrice());
 			SpeakUtil.speak(1,hero.getName()+"購買了"+commodity.getCom_name());
+			hero.getNewItem(new Item("古怪的石頭"));
 			SpeakUtil.speak(1,"(真是奇怪的石頭，也許會在哪裡派上用場?)");
 		}else if(commodity.getCom_type()==4) {
 			hero.setMoney(hero.getMoney()-commodity.getPrice());

@@ -279,7 +279,7 @@ public class Hero {
 			this.def+=3;
 			this.dex+=3;
 		}else {
-			double son = Math.random();
+			double son = Math.random()*100;
 			double mom = 100/6;
 			switch((int)(son/mom)) {
 				case 0:

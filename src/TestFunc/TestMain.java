@@ -22,6 +22,7 @@ import Utils.StoreUtil;
 import Utils.StoryUtil;
 import Utils.WaitUtil;
 import monsters.BossSeaBeast;
+import monsters.FinalBoss;
 import monsters.FunnySnake;
 import monsters.Monster;
 
@@ -29,7 +30,8 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		
-		
+		boolean seaBossBeatYN = false;
+		boolean finalBossBeatYN = false;
 //		//測試咒語部分 隨機產生字串
 //		byte[] b_arr = {'a','b','c','d','e','f','g'};//new byte[20];
 //		System.out.println(b_arr);
@@ -62,7 +64,7 @@ public class TestMain {
 		
 		StoryUtil storyutil = new StoryUtil();
 		
-		while(day<=12) {
+		while(day<=100) {
 			
 			SpeakUtil.speak(1,"今天是第"+day+"天");
 			storyutil.sayNews(day, hero);
@@ -82,6 +84,38 @@ public class TestMain {
 			maputil.getMapNPC(hero, gambler);
 			maputil.getMapNPC(hero, traveler);
 			princess.appear(day,maputil);
+			
+			if(day>=11&&maputil.getCurrentMap(hero).getId()==6&&!seaBossBeatYN) {//海怪boss
+				Monster seaBoss = new BossSeaBeast();
+				SpeakUtil.speak(1,name+"遭遇了等級"+seaBoss.getMonster_level()+"的"+seaBoss.getName()+"!");
+				SpeakUtil.speak(1,seaBoss.toString());
+				if(hero.failToEscape()) {
+					FightUtil fightutil= new FightUtil();
+					fightutil.fight(hero, seaBoss);
+					if(!hero.isAlive_yn()||hero.getLife()<=0) {
+						SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+						break;
+					}else {
+						seaBossBeatYN=true;
+					}
+				}
+			}
+			
+			if(maputil.getCurrentMap(hero).getId()==9&&!finalBossBeatYN) {//海怪boss
+				Monster boss = new FinalBoss();
+				SpeakUtil.speak(1,name+"遭遇了等級"+boss.getMonster_level()+"的"+boss.getName()+"!");
+				SpeakUtil.speak(1,boss.toString());
+				if(hero.failToEscape()) {
+					FightUtil fightutil= new FightUtil();
+					fightutil.fight(hero, boss);
+					if(!hero.isAlive_yn()||hero.getLife()<=0) {
+						SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+						break;
+					}else {
+						finalBossBeatYN=true;
+					}
+				}
+			}
 			
 			if(maputil.MonsterHappenedYn()) {
 				Monster monster = maputil.getMapMonster(hero);

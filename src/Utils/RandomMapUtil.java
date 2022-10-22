@@ -31,6 +31,7 @@ public class RandomMapUtil {
 	private double event_ratio;
 	private double mon_ratio;
 	
+	
 	public RandomMapUtil() {
 		//一維座標跟二維做標的位置對應是可以有邏輯的，不要存無用的代號跟[-1][1]~[1][-1]的位置
 		my_map = new MyMap[3][3];		
@@ -179,7 +180,7 @@ public class RandomMapUtil {
 		return v<=this.mon_ratio;
 	}
 	
-
+	
 
 	
 	public void getIntoNewMap(Hero hero){
