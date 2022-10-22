@@ -66,12 +66,12 @@ public class Hero {
 		this.life = 40;
 		this.magic = 30;
 		this.max_magic = 30;
-		this.atk = 10;
+		this.atk = 100;
 		this.weapon_atk=0;
-		this.def = 10;
+		this.def = 100;
 		this.ats = 10;
 		this.res = 10;
-		this.dex = 10;
+		this.dex = 100;
 		this.crit = 0.15;
 		this.level=1;
 		this.exp=0;
@@ -147,6 +147,13 @@ public class Hero {
 				SpeakUtil.speak(1,this.name+"的某個能力似乎下降了?");
 				break;
 		}
+	}
+	
+	public void getDropItem(Monster monster){
+		if(monster.drop_item()!=null) {
+			getNewItem(monster.drop_item());
+		}		
+		
 	}
 	
 	public void getNewItem(Item item) {
@@ -252,8 +259,8 @@ public class Hero {
 	
 	public void newLevelWish() {
 		SpeakUtil.speak(1,name+"等級提升，受到冒險之神的眷顧，可以許一個願望，請選擇：");
-		SpeakUtil.speak(1,"Q:生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
-		SpeakUtil.speak(1,"W:提升攻擊力、防禦力、敏捷力各3點");
+		SpeakUtil.speak(2,"Q:生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
+		SpeakUtil.speak(2,"W:提升攻擊力、防禦力、敏捷力各3點");
 		SpeakUtil.speak(2,"E:提升隨機能力值10點(最大生命值/最大魔法值/攻擊/防禦/敏捷/爆擊)");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
@@ -301,7 +308,7 @@ public class Hero {
 	}
 	
 	public void getExperience(int mon_exp) {//待修正，升級效果由玩家選擇
-		
+		SpeakUtil.speak(1,this.name+"獲得了"+mon_exp+"點經驗值");
 		this.exp+=mon_exp;
 		
 		while(this.exp>=this.exp_needed) {
@@ -336,7 +343,7 @@ public class Hero {
 		}
 	}
 	
-	public boolean escape() {
+	public boolean failToEscape() {
 		SpeakUtil.speak(2,this.name+"是否要嘗試逃跑? 請選擇: (W)是 (任意鍵):否");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
@@ -352,7 +359,7 @@ public class Hero {
 				SpeakUtil.speak(1,this.name+"成功逃跑了");
 				return false;
 			}else{
-				SpeakUtil.speak(1,"逃跑失敗!進入戰鬥!");
+				SpeakUtil.speak(1,"逃跑失敗!被追上了!");
 				return true;
 			}
 			
@@ -380,6 +387,12 @@ public class Hero {
 	}
 
 	public void moneyChange(int change_num) {
+		
+		this.money+=change_num;
+	}
+	
+	public void getMonsterMoney(int change_num) {
+		SpeakUtil.speak(1, name+"獲得了"+change_num+"元");
 		this.money+=change_num;
 	}
 	

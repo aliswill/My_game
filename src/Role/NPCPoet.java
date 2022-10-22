@@ -1,15 +1,21 @@
 package Role;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Utils.RandomMapUtil;
 import Utils.SpeakUtil;
+import map.CultCamp;
+import map.Forest;
+import map.MyMap;
+import map.WindyDesert;
 
 public class NPCPoet implements NPCrole{
 
 	private Hero hero;
 	private int meet_time;
-	
+	private List<Integer> appearMap;
 	private RandomMapUtil maputil;
 	
 	public NPCPoet(Hero hero, RandomMapUtil maputil) {
@@ -17,6 +23,14 @@ public class NPCPoet implements NPCrole{
 		this.meet_time=0;
 		this.hero = hero;
 		this.maputil = maputil;
+		appearMap = new ArrayList<Integer>();
+		appearMap.add(new Forest().getId());
+		appearMap.add(new WindyDesert().getId());
+	}
+
+
+	public List<Integer> getAppearMap() {
+		return appearMap;
 	}
 
 

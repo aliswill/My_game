@@ -11,7 +11,7 @@ public class CultCamp extends MyMap{
 		super();
 		this.id=7;
 		this.map_level = 12;
-		this.map_name = "邪教營地";
+		this.map_name = "叛神教據點";
 		this.monsters = new Monster[]{new CultPriest(),new CultLord()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;

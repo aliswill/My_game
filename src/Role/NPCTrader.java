@@ -1,21 +1,28 @@
 package Role;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import Utils.Commodity;
 import Utils.SpeakUtil;
+import map.CultCamp;
+import map.MyMap;
+import map.WindyDesert;
 
 public class NPCTrader implements NPCrole{
 private Map<String,Commodity> commodities;
 private Hero hero;
-
+private List<Integer> appearMap;
 	
 	
 	public NPCTrader(Hero hero) {
 		this.hero = hero;
-		
+		appearMap = new ArrayList<Integer>();
+		appearMap.add(new CultCamp().getId());
+		appearMap.add(new WindyDesert().getId());
 		commodities = new HashMap<String,Commodity>();
 		commodities.put("Q", new Commodity(90,"秘銀寶劍",1,10));
 		commodities.put("W", new Commodity(140,"骨製巨劍",1,14));
@@ -26,6 +33,14 @@ private Hero hero;
 		
 	}
 	
+	
+	
+	public List<Integer> getAppearMap() {
+		return appearMap;
+	}
+
+
+
 	public String welcomStore() {
 	SpeakUtil.speak(1,"(路旁，一名旅行商人揹著沉重的囊袋)");
 	SpeakUtil.speak(1,"旅行商人:年輕人啊，要不要看看我這兒的商品?我可是有很多你平常買不到的稀奇寶貝");

@@ -1,23 +1,45 @@
 package Role;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Utils.FightUtil;
 import Utils.SpeakUtil;
 import Utils.WaitUtil;
+import map.AbandonedCity;
+import map.CultCamp;
+import map.MyMap;
+import map.Town;
+import map.WindyDesert;
 import monsters.Monster;
 import monsters.Beggar;
 
 public class NPCBeggar implements NPCrole {
 
 	private Hero hero;
-	
+	private List<Integer> appearMap;
 	public NPCBeggar(Hero hero) {
 		super();
 		this.hero = hero;
+		appearMap = new ArrayList<Integer>();
+		appearMap.add(new Town().getId());
+		appearMap.add(new AbandonedCity().getId());
 	}
 
-
+//	public boolean appearThisMapYN(MyMap cur_map) {
+//		for(MyMap map: appearMap) {
+//			if(map.getId()==cur_map.getId()) {
+//				return true;
+//			}
+//			return false;
+//		}
+//		return false; 			//為何要加這行?		
+//	}
+	
+	
+	
+	
 	@Override
 	public void appear() {
 		SpeakUtil.speak(1,"一名乞丐蜷曲著雙腿對你乞討");
@@ -60,6 +82,10 @@ public class NPCBeggar implements NPCrole {
 			SpeakUtil.speak(1,"("+hero.getName()+"無視了他");
 			
 		}		
+	}
+
+	public List<Integer> getAppearMap() {		
+		return appearMap;
 	}
 
 

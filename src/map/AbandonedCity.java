@@ -10,7 +10,7 @@ public class AbandonedCity extends MyMap{
 		super();
 		this.id=8;
 		this.map_level = 14;
-		this.map_name = "廢棄古城";
+		this.map_name = "廢棄舊城區";
 		this.monsters = new Monster[]{new BattleMachine(),new RelicGuard()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;

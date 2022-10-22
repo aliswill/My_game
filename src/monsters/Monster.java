@@ -20,7 +20,7 @@ public abstract class Monster {
 	protected int money;
 	protected String atk_style;
 	protected double crit;
-
+	protected Item drop_item;
 	
 	//public abstract int magic_atk(); 
 	
@@ -41,7 +41,10 @@ public abstract class Monster {
 	}
 	
 
-
+	public Item drop_item() {	
+			return drop_item;
+			
+	}
 //	@Override
 //	public String toString() {
 //		return monster_name+" 的狀態為：生命值：" + life + ",魔法力：" + magic + ",攻擊力：" + atk + ",防禦力:" + def + ",魔法攻擊力:" + ats + ",魔法防禦力:"
@@ -74,7 +77,7 @@ public abstract class Monster {
 		if(this.life<=0) {			
 			this.alive_yn=false;
 			SpeakUtil.speak(1,this.monster_name+"受到了"+damage+"點傷害，並且無力的倒下了。");
-			SpeakUtil.speak(1,hero.getName()+"獲得了"+this.exp+"點經驗值");
+			//SpeakUtil.speak(1,hero.getName()+"獲得了"+this.exp+"點經驗值");
 			return damage;
 		}
 		SpeakUtil.speak(1,this.monster_name+"受到了"+damage+"點傷害"+" (剩餘血量"+this.life+")");

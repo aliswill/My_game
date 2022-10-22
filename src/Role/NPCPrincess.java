@@ -17,16 +17,16 @@ public class NPCPrincess  {
 	private int help_time;
 	private RandomMapUtil maputil;
 	
-	public NPCPrincess(Hero hero,RandomMapUtil maputil) {
+	public NPCPrincess(Hero hero) {
 		super();
 		this.meet_time=0;
 		this.hero = hero;
 		this.help_time=0;
-		maputil = new RandomMapUtil();
+		
 	}
 	
 	//問題:建構的時候傳的hero 會跟後來的hero狀態都是連動的嗎?
-	public void appear(int day) {
+	public void appear(int day,RandomMapUtil maputil) {
 		MyMap cur_map = maputil.getCurrentMap(hero);
 		//固定天數在固定地點一定會遇到 5/6天城鎮，9/10天沙漠 15/16古城
 		//最多共遇到3次，每次提不同的要求，3次都達成擇滿足條件
@@ -110,7 +110,7 @@ public class NPCPrincess  {
 				SpeakUtil.speak(1,"(女子抬起頭看向了你)");
 				SpeakUtil.speak(1,"女子:啊!是你!"+"hero.getName()");
 				SpeakUtil.speak(1,hero.getName()+":你是..");		
-				SpeakUtil.speak(2,"請選擇: W:貝爾蘿菈 E:艾爾薇瑟 R:愛麗絲 T:羅塔汀 ");	
+				SpeakUtil.speak(2,"請選擇: Q:愛麗絲 W:貝爾蘿菈 E:艾爾薇瑟 R:羅塔汀 T:林志玲 ");	
 				v = sc.next();
 				if(v.equalsIgnoreCase("E")) {//答對
 					SpeakUtil.speak(1,"艾爾薇瑟:對!你還記得我的名子..(艾爾薇瑟看起來很開心的樣子)");
@@ -131,10 +131,10 @@ public class NPCPrincess  {
 						SpeakUtil.speak(1,"艾爾薇瑟:我不該讓父親擔心的..我該回去了");
 						SpeakUtil.speak(1,"艾爾薇瑟:謝謝你聽我說心事，還幫了我這麼多次");
 						SpeakUtil.speak(1,"艾爾薇瑟:再會了"+hero.getName()+"，我回去一定會和父親說我遇到了一位向你這般英勇又體貼的人");			
-						SpeakUtil.speak(1,"艾爾薇瑟:很快我們一定會再會的，溫柔的勇士");
+						SpeakUtil.speak(1,"艾爾薇瑟:很快我們一定會再見的，溫柔的勇士");
 						SpeakUtil.speak(1,"艾爾薇瑟:對了，這個送給你，你戴著他一定要常常想著我");
 						hero.getNewItem(new Item("精緻的手鐲"));
-						SpeakUtil.speak(1,"("+hero.getName()+"得到了精緻的手鐲)");
+				
 						SpeakUtil.speak(1,"(艾爾薇瑟擁抱了你並離開了)");
 						this.help_time++;
 					}else {

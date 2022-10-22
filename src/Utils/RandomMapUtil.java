@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import Role.Hero;
+import Role.NPCrole;
 import map.AbandonedCity;
 import map.CultCamp;
 import map.DeepOcean;
@@ -25,16 +26,17 @@ import monsters.Monster;
 
 public class RandomMapUtil {
 
-	//private Map<MyMap,PositionUtil> recordMap;	
 	private MyMap[][] my_map;
-//	private double cur_map_money_param;
-//	private double cur_map_good_event_ratio;
-//	private double cur_map_bad_event_ratio;
-//	private double cur_map_ability_param;
 	private MyMap cur_map;
 	private double event_ratio;
 	private double mon_ratio;
 	
+	public RandomMapUtil() {
+		//一維座標跟二維做標的位置對應是可以有邏輯的，不要存無用的代號跟[-1][1]~[1][-1]的位置
+		my_map = new MyMap[3][3];		
+		this.event_ratio=0.5;
+		this.mon_ratio=0.5;
+	}
 	
 	
 	public String getDanagerousDirection(Hero hero) {//待優化!依照物件的屬性排序
@@ -95,13 +97,7 @@ public class RandomMapUtil {
 		this.mon_ratio = mon_ratio;
 	}
 
-	public RandomMapUtil() {
-		//一維座標跟二維做標的位置對應是可以有邏輯的，不要存無用的代號跟[-1][1]~[1][-1]的位置
-		my_map = new MyMap[3][3];		
-		this.event_ratio=0.5;
-		this.mon_ratio=0.5;
-	}
-	
+
 	public void reLocateHero(Hero hero) {
 		//MyMap town = my_map.;
 		for(int x=0;x<3;x++) {
@@ -120,7 +116,7 @@ public class RandomMapUtil {
 	}
 	
 	public boolean approachable(Hero hero) {
-		if(getCurrentMap(hero).getMap_name().equals("皇家的禁地")) {
+		if(getCurrentMap(hero).getId()==9) {
 			if(hero.haveItemYN("國王的許可證")) {
 				//有指定道具才能進入
 				SpeakUtil.speak(1,hero.getName()+"出示了國王的許可證，守衛便打開了門");
@@ -132,6 +128,14 @@ public class RandomMapUtil {
 			}
 		}else {
 			return true;
+		}
+	}
+	
+	public void getMapNPC(Hero hero,NPCrole NPC) {
+		if(NPC.getAppearMap().contains(getCurrentMap(hero).getId())) {//該NPC出現範圍包含當前地圖
+			if(Math.random()<0.4) {
+				NPC.appear();
+			}
 		}
 	}
 	
@@ -176,36 +180,7 @@ public class RandomMapUtil {
 	}
 	
 
-	
-//	public void getMapEvent(Hero hero) { //這個方法會先決定好事還是壞事
-//		cur_map = my_map[hero.getX_index()][hero.getY_index()];
-//		cur_map_money_param = cur_map.getMoney_param();
-//		cur_map_ability_param = cur_map.getAbility_param();
-//		cur_map_good_event_ratio = cur_map.getGood_event_ratio();
-//		cur_map_bad_event_ratio = cur_map.getBad_event_ratio();
-//		//int good_bad_event = EventUtil(cur_map_good_event_ratio,cur_map_bad_event_ratio);
-//		
-//		if(good_bad_event==1) {
-//			EventComUtil event = new EventComUtil(good_bad_event,,,);
-//		}else if(good_bad_event==2) {
-//			
-//		}else {
-//			
-//		}
-//	}
-	
-	
-	
-//	public int EventUtil(double good_event_ratio,double bad_event_ratio) {
-//		double v = Math.random();
-//		if(v<good_event_ratio) {//發生好事
-//			return 1;
-//		}else if(v>=good_event_ratio&&v<(good_event_ratio+bad_event_ratio)) {//發生壞事
-//			return -1;
-//		}else {//什麼都沒發生
-//			return 0;
-//		}
-//	}
+
 	
 	public void getIntoNewMap(Hero hero){
 		my_map[hero.getX_index()][hero.getY_index()].addViewTime();

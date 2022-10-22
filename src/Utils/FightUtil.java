@@ -17,8 +17,10 @@ public class FightUtil {
 				SpeakUtil.speak(2,hero.getName()+"用力的揍了"+monster.getName());
 				monster.hurt(hero);
 				if(!monster.getAliveYN()) {
+				
+				hero.getMonsterMoney(monster.getMoney());;
+				hero.getDropItem(monster);
 				hero.getExperience(monster.getExp());
-				hero.getMoney(monster.getMoney());
 				break;
 			}
 			}else {//怪物攻擊

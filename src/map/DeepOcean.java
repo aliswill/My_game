@@ -18,7 +18,7 @@ public class DeepOcean extends MyMap {
 		this.monsters = new Monster[]{new WhaleKiller(),new Siren()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;
-		this.boss= new BossSeaBeast();
+
 		
 		this.eventComUtil = new EventComUtil[] {
 				new EventComUtil(1,0,1,"撿到了閃閃發光的珍珠，似乎滿值錢的",20)//好事/無特殊條件/金錢類事件/影響值

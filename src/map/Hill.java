@@ -13,7 +13,7 @@ public class Hill extends MyMap {
 		super();
 		this.id=2;
 		this.map_level = 3;
-		this.map_name = "野性山丘";
+		this.map_name = "野人山丘";
 		this.monsters = new Monster[]{new FunnySnake(),new StrongBear()};
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;

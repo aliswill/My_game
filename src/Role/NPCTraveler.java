@@ -1,24 +1,38 @@
 package Role;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Utils.RandomMapUtil;
 import Utils.SpeakUtil;
 import Utils.WaitUtil;
+import map.CultCamp;
+import map.Hill;
+import map.MyMap;
+import map.OldTomb;
+import map.WindyDesert;
 
 public class NPCTraveler implements NPCrole{
-
+	private List<Integer> appearMap;
 	private Hero hero;
 	private RandomMapUtil maputil;
 	public NPCTraveler(Hero hero,RandomMapUtil maputil) {
 		this.hero=hero;
 		this.maputil=maputil;
+		appearMap = new ArrayList<Integer>();
+		appearMap.add(new Hill().getId());
+		appearMap.add(new OldTomb().getId());
 	}
 	
+	public List<Integer> getAppearMap() {
+		return appearMap;
+	}
+
 	@Override
 	public void appear() {
 		// TODO Auto-generated method stub
-		SpeakUtil.speak(1,"前方出現一名狼狽不堪的旅行者，全身都是汙跡跟血漬");
+		SpeakUtil.speak(1,"(前方出現一名狼狽不堪的旅行者，全身都是汙跡跟血漬)");
 		
 		SpeakUtil.speak(2,"請選擇：　W:嘲笑他  E:遞給他水喝 任意鍵:無視");
 		Scanner sc = new Scanner(System.in);

@@ -1,19 +1,33 @@
 package Role;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import Utils.CheckType;
 import Utils.SpeakUtil;
 import Utils.WaitUtil;
+import map.CultCamp;
+import map.Hill;
+import map.MyMap;
+import map.Town;
+import map.WindyDesert;
 
 public class NPCGambler implements NPCrole {
 
 	private Hero hero;
-	
+	private List<Integer> appearMap;
 	
 	public NPCGambler(Hero hero) {
 		super();
 		this.hero = hero;
+		appearMap = new ArrayList<Integer>();
+		appearMap.add(new Town().getId());
+		appearMap.add(new Hill().getId());
+	}
+	
+	public List<Integer> getAppearMap() {
+		return appearMap;
 	}
 
 	@Override

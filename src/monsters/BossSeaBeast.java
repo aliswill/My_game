@@ -2,7 +2,7 @@ package monsters;
 
 import Items.Item;
 
-public class BossSeaBeast extends BossMonster {
+public class BossSeaBeast extends Monster {
 	public BossSeaBeast() {
 		super();
 		this.monster_name="BOSS - 深海巨獸";
