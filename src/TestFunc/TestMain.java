@@ -134,16 +134,26 @@ public class TestMain {
 				
 				SpeakUtil.speak(1,"今天沒有遭遇怪物。");
 			}
+			
 			maputil.getMapEvent(hero);
 			if(!hero.isAlive_yn()||hero.getLife()<=0) {
 				SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
 				break;
 			}
+			
 			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
 				StoreUtil storeutil = new StoreUtil();
 				storeutil.useHotel(hero);
 				
 			}
+			
+			storyutil.sayKey(hero);
+			
+			if(storyutil.sayEndding(hero, day)) {
+				break;
+			}
+			
+			
 			
 			SpeakUtil.speak(1,"--------------------------------------------");
 			SpeakUtil.speak(1,"今天"+hero.getName()+"的狀態值為:"+hero.toString());

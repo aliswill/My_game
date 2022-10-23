@@ -76,7 +76,7 @@ public class StoryUtil {
 		}
 	}
 	
-	public void sayEndding(Hero hero,int day) {
+	public boolean sayEndding(Hero hero,int day) {
 		if(hero.haveItemYN("反叛軍的頭顱")) {
 			
 			SpeakUtil.speak(1,"("+hero.getName()+"擊敗了國內暗藏的反叛勢力的事情引起舉國嘩然)");
@@ -116,6 +116,7 @@ public class StoryUtil {
 					SpeakUtil.speak(1,"****日後，就讓我們一同見證這位新王帶領的國家，將會走向何方吧!*****");
 					SpeakUtil.speak(1,"*****遊戲結束*****");
 					SpeakUtil.speak(1,"國王結局達成!");
+					return true;
 				}else {
 					SpeakUtil.speak(1,"國王:這樣吧，"+hero.getName()+"，本王賜予你一塊封地與勇者的稱號，日後你亦可享盡榮華與富貴");
 					SpeakUtil.speak(1,"國王:這可比當國王輕鬆多了呵呵");
@@ -124,6 +125,7 @@ public class StoryUtil {
 					SpeakUtil.speak(1,"****"+hero.getName()+"成為舉國之名的勇者，並擁有自己的封地，一輩子再不愁吃穿*****");
 					SpeakUtil.speak(1,"*****遊戲結束*****");
 					SpeakUtil.speak(1,"勇者結局達成!");
+					return true;
 				}
 			}else if(v.equalsIgnoreCase("e")) {
 				if(hero.haveItemYN("精緻的手鐲")) {
@@ -143,6 +145,7 @@ public class StoryUtil {
 					SpeakUtil.speak(1,"****"+hero.getName()+"與公主的婚禮受到全國百姓的祝福，兩人互相扶持，歡度餘生*****");
 					SpeakUtil.speak(1,"*****遊戲結束*****");
 					SpeakUtil.speak(1,"駙馬結局達成!");
+					return true;
 				}else {
 					SpeakUtil.speak(1,"(國王似乎面有難色的樣子)");
 					SpeakUtil.speak(1,"國王:這...並非本王不想答應");
@@ -158,6 +161,7 @@ public class StoryUtil {
 					SpeakUtil.speak(1,"****"+hero.getName()+"成為舉國之名的勇者，並擁有自己的封地，一輩子再不愁吃穿*****");
 					SpeakUtil.speak(1,"*****遊戲結束*****");
 					SpeakUtil.speak(1,"勇者結局達成!");
+					return true;
 				}
 			}if(v.equalsIgnoreCase("r")) {
 				SpeakUtil.speak(1,"國王:沒問題，你既然拯救了本王，你自然應得舉國的讚揚與無上的榮光");
@@ -167,6 +171,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"****"+hero.getName()+"成為了連後世的百姓都琅琅上口的著名的勇者*****");
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"勇者(名譽)結局達成!");
+				return true;
 			}else {
 				SpeakUtil.speak(1,"國王:哈哈哈，沒問題，你既然拯救了本王，金銀財寶自然是供你想用不盡的");
 				SpeakUtil.speak(1,"國王:這樣吧!本王授你勇者稱號，並賞你一車的財寶，夠你一輩子不愁吃穿了");
@@ -175,6 +180,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"****"+hero.getName()+"成為了一輩子不愁吃穿的富豪勇者*****");
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"勇者(富豪)結局達成!");
+				return true;
 			}
 		}else if(day>=20) {
 			SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許多個年頭)");
@@ -187,6 +193,8 @@ public class StoryUtil {
 			SpeakUtil.speak(1,"***"+hero.getName()+"在時間的磨礪中成為一名小有名氣的冒險者，並且將會繼續他的冒險旅途***");
 			SpeakUtil.speak(1,"*****遊戲結束*****");
 			SpeakUtil.speak(1,"冒險家結局達成!");
+			return true;
 		}
+		return false;
 	}
 }
