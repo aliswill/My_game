@@ -16,6 +16,13 @@ public class FightUtil {
 				//目標設計多種指令:1.攻擊 2.使用咒文 3.逃跑(僅在戰鬥一開始可以跑)
 				SpeakUtil.speak(2,hero.getName()+"用力的揍了"+monster.getName());
 				monster.hurt(hero);
+				if(hero.isHaveCat_yn()) {
+					if(Math.random()<0.3) {
+						int final_value = Math.min(hero.getLife()+(int)(hero.getMax_life()*0.05), hero.getMax_life());					
+						SpeakUtil.speak(2,hero.getCat_name()+"幫你舔舐傷口，"+hero.getName()+"恢復了"+(final_value-hero.getLife())+"點生命值");
+						hero.setLife(final_value);
+					}
+				}
 				if(!monster.getAliveYN()) {
 				
 				hero.getMonsterMoney(monster.getMoney());;

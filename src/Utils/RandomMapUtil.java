@@ -104,7 +104,8 @@ public class RandomMapUtil {
 		for(int x=0;x<3;x++) {
 			for(int y=0;y<3;y++) {
 				if(my_map[x][y].getMap_name().equals("平凡的小鎮")){
-					SpeakUtil.speak(1,hero.getName()+"是一名嚮往充滿挑戰性的生活的冒險家，他將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
+					SpeakUtil.speak(1,hero.getName()+"出生於城邦之國，他的父親是一名小有名氣的冒險家，雖然多年前父親就去世了，但他決心傳承這份職業，成為一位了不起的冒險家揚名天下。");
+					SpeakUtil.speak(1,"那日，他踏上旅程，將從"+my_map[x][y].getMap_name()+"出發，展開他充滿挑戰的旅程!");
 					hero.setLocation(x, y);
 				}
 			}
@@ -134,7 +135,7 @@ public class RandomMapUtil {
 	
 	public void getMapNPC(Hero hero,NPCrole NPC) {
 		if(NPC.getAppearMap().contains(getCurrentMap(hero).getId())) {//該NPC出現範圍包含當前地圖
-			if(Math.random()<0.4) {
+			if(Math.random()<0.35) {
 				NPC.appear();
 			}
 		}
@@ -149,7 +150,7 @@ public class RandomMapUtil {
 			int map_event_num = cur_map.getEvent_num();
 			double v = Math.random()*100;
 			int event_index = (int)(v/(100/map_event_num));
-			EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);
+			EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);//TODO:會有例外?
 			SpeakUtil.speak(1,hero.getName()+eventComUtil.getEvent_describe());
 			hero.getEventEffect(eventComUtil.getGood_or_bad_type(),(int)(eventComUtil.getOrigin_value()*cur_map.getEffect_param()),eventComUtil.getEvent_type());//好事壞事/影響值/事件類型
 		}else {

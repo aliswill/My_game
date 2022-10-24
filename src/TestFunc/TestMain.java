@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import Role.Hero;
 import Role.NPCBeggar;
+import Role.NPCCat;
 import Role.NPCGambler;
 import Role.NPCPoet;
 import Role.NPCPrincess;
@@ -30,6 +31,8 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		
+		
+		
 		boolean seaBossBeatYN = false;
 		boolean finalBossBeatYN = false;
 //		//測試咒語部分 隨機產生字串
@@ -49,11 +52,9 @@ public class TestMain {
 		Scanner scanner = new Scanner(System.in);
 		String name = scanner.next();
 		Hero hero = new Hero(name);			
-		
+		StoryUtil storyutil = new StoryUtil();
 		RandomMapUtil maputil = new RandomMapUtil();
-		maputil.makeMap();
-		maputil.reLocateHero(hero);
-		
+		maputil.makeMap();		
 		
 		NPCrole trader = new NPCTrader(hero);
 		NPCrole poet = new NPCPoet(hero, maputil);
@@ -61,10 +62,12 @@ public class TestMain {
 		NPCrole gambler = new NPCGambler(hero);
 		NPCrole traveler = new NPCTraveler(hero, maputil);
 		NPCPrincess princess = new NPCPrincess(hero);
+		NPCCat cat = new NPCCat(hero);
 		
-		StoryUtil storyutil = new StoryUtil();
-		
-		while(day<=100) {
+		storyutil.sayStart(day);
+		maputil.reLocateHero(hero);
+		maputil.getMapNPC(hero, traveler);
+		while(day<=25) {
 			
 			SpeakUtil.speak(1,"今天是第"+day+"天");
 			storyutil.sayNews(day, hero);
@@ -83,6 +86,7 @@ public class TestMain {
 			maputil.getMapNPC(hero, beggar);
 			maputil.getMapNPC(hero, gambler);
 			maputil.getMapNPC(hero, traveler);
+			maputil.getMapNPC(hero, cat);
 			princess.appear(day,maputil);
 			
 			if(day>=11&&maputil.getCurrentMap(hero).getId()==6&&!seaBossBeatYN) {//海怪boss

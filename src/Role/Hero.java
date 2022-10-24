@@ -42,6 +42,8 @@ public class Hero {
 	private double crit;//爆擊率
 	private int max_magic;
 	private Map<String,Item> Items;
+	private boolean haveCat_yn;
+	private String cat_name;
 	
 	
 //	@Override
@@ -54,7 +56,14 @@ public class Hero {
 	@Override
 	public String toString() {
 		return this.name+"的生命值：" + life  + ",攻擊力：" + atk + ",防禦力:" + def  + 
-				 ",敏捷力：" + dex + ",等級：" + level + ",爆擊率:" + crit +",金錢:" + money;
+				 ",敏捷力：" + dex + ",等級：" + level + ",爆擊率:" + crit +",金錢:" + money
+				 +",武器攻擊力:"+weapon_atk+",裝備防禦力:"+equ_def;
+	}
+	public String getCat_name() {
+		return cat_name;
+	}
+	public void setCat_name(String cat_name) {
+		this.cat_name = cat_name;
 	}
 	public Hero(String name) {
 		super();
@@ -62,22 +71,23 @@ public class Hero {
 		this.y_index=1;
 		this.name = name;
 		this.alive_yn=true;
-		this.max_life = 40;
-		this.life = 40;
+		this.max_life = 50;
+		this.life = 50;
 		this.magic = 30;
 		this.max_magic = 30;
-		this.atk = 100;
+		this.atk = 140;
 		this.weapon_atk=0;
-		this.def = 100;
+		this.def = 140;
 		this.ats = 10;
 		this.res = 10;
-		this.dex = 100;
+		this.dex = 14;
 		this.crit = 0.15;
 		this.level=1;
 		this.exp=0;
 		this.money = 10;
 		this.exp_needed = 5;
 		this.Items = new HashMap<String,Item>();
+		this.haveCat_yn=false;
 	}
 	
 	
@@ -528,6 +538,12 @@ public class Hero {
 		this.max_magic = max_magic;
 	}
 	
+	public boolean isHaveCat_yn() {
+		return haveCat_yn;
+	}
+	public void setHaveCat_yn(boolean haveCat_yn) {
+		this.haveCat_yn = haveCat_yn;
+	}
 	public void setLocation(int x,int y) {
 		this.x_index=x;
 		this.y_index=y;

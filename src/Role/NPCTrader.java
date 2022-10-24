@@ -56,7 +56,7 @@ private List<Integer> appearMap;
 	
 	}
 
-	public void useStore(Hero hero,String welcome_yn) {//TODO:有BUG要修 金錢不足時無法再次購買		
+	public void useStore(Hero hero,String welcome_yn) {//TODO:有BUG要修 錢不夠也可以買石頭?		
 		// TODO Auto-generated method stub			
 		if(welcome_yn.equalsIgnoreCase("Y"))  {
 			SpeakUtil.speak(1,"旅行商人:唷呵呵~好眼光，盡情挑吧~ (按對應鍵購買，或按Z離開商店)");

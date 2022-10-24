@@ -34,7 +34,15 @@ public class StoryUtil {
 	//第七天開始號召討伐海怪
 	//最後根據hero的條件顯示結局=>放到其他類?
 	public void sayStart(int day) {
-		SpeakUtil.speak(1,"");
+		if(day==1) {
+			SpeakUtil.speak(1,"許久之前，在一個城邦之國，那裡地形複雜，猛獸眾多，對普通人而言，絕對不算是宜居之地");		
+			SpeakUtil.speak(1,"因為地處邊陲，並沒有活絡的商業發展，所幸，政治局勢也還算安穩，即使國王年老，儲君也還未定，多年來也並未發生什麼大亂");
+			SpeakUtil.speak(1,"至少表面上是的...");
+			SpeakUtil.speak(1,"此外，那裡的奇珍異獸，珍稀的寶石，與沙漠中的寶藏傳聞，吸引了諸多人開始以「冒險者」為業，四處遊歷");	
+			SpeakUtil.speak(1,"雖然其中也不乏有冒險者葬身於海獸口中，或跌落山崖，但還是不斷誕生引人入勝的冒險故事");
+			SpeakUtil.speak(1,"就在這樣一個時代，屬於「他」的故事誕生了，就讓我們一起見證這個故事吧");
+		}
+		
 	}
 	
 	public void sayNews(int day,Hero hero) {
@@ -182,7 +190,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"勇者(富豪)結局達成!");
 				return true;
 			}
-		}else if(day>=20) {
+		}else if(day>=25) {
 			SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許多個年頭)");
 			SpeakUtil.speak(1,"(見識了許各種各樣的地方，也遭遇了許多危險)");
 			SpeakUtil.speak(1,"(漸漸地，認識"+hero.getName()+"的人也愈來愈多)");
