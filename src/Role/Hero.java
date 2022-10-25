@@ -75,9 +75,9 @@ public class Hero {
 		this.life = 50;
 		this.magic = 30;
 		this.max_magic = 30;
-		this.atk = 140;
+		this.atk = 14;
 		this.weapon_atk=0;
-		this.def = 140;
+		this.def = 14;
 		this.ats = 10;
 		this.res = 10;
 		this.dex = 14;
@@ -397,8 +397,12 @@ public class Hero {
 	}
 
 	public void moneyChange(int change_num) {
+		if((this.money+change_num)<0) {
+			this.money=0;
+		}else {
+			this.money+=change_num;
+		}
 		
-		this.money+=change_num;
 	}
 	
 	public void getMonsterMoney(int change_num) {

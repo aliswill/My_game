@@ -191,7 +191,7 @@ public class StoryUtil {
 				return true;
 			}
 		}else if(day>=25) {
-			SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許多個年頭)");
+			SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 			SpeakUtil.speak(1,"(見識了許各種各樣的地方，也遭遇了許多危險)");
 			SpeakUtil.speak(1,"(漸漸地，認識"+hero.getName()+"的人也愈來愈多)");
 			SpeakUtil.speak(1,"("+hero.getName()+"在國內已是小有名氣的冒險者)");

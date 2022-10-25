@@ -69,10 +69,13 @@ public class TestMain {
 		maputil.getMapNPC(hero, traveler);
 		while(day<=25) {
 			
-			SpeakUtil.speak(1,"今天是第"+day+"天");
+//			int year = day/12;
+//			int month=day%12;
+			
+			SpeakUtil.speak(1,"---   Day "+day+"   ---");
 			storyutil.sayNews(day, hero);
 	
-			if(maputil.getCurrentMap(hero).getId()==1) {				
+			if(maputil.getCurrentMap(hero).getId()==1&&day!=1) {				
 				StoreUtil storeutil = new StoreUtil();
 				String welcome_yn = storeutil.welcomStore();
 				storeutil.useStore(hero, welcome_yn);				

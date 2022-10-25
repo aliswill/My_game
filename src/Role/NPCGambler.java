@@ -61,7 +61,7 @@ public class NPCGambler implements NPCrole {
 					
 					System.out.println(hero.getName()+"的金錢變為:"+hero.getMoney());
 				}else {
-					hero.moneyChange(-gam_num*2);
+					hero.moneyChange(-gam_num);
 					
 					System.out.println(hero.getName()+"的金錢變為:"+hero.getMoney());
 				}

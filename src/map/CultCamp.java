@@ -25,7 +25,7 @@ public class CultCamp extends MyMap{
 				,new EventComUtil(1,0,8,"撿到一件邪教祭司的法袍",4)
 				,new EventComUtil(-1,0,5,"被信徒發現行蹤，遭到綑綁與毆打",20)
 				,new EventComUtil(-1,0,4,"不小心踩到過去祭邪的陣法，全身都變得相當沉重",3)
-				,new EventComUtil(1,0,2,"向邪神許願變得強大，感覺全身湧現不祥的力量，但背後會有代價嗎..?",10)
+				,new EventComUtil(1,0,10,"向邪神許願變得強大，感覺全身湧現不祥的力量，但背後會有代價嗎..?",3)
 				,new EventComUtil(1,0,9,"背誦祭祀的咒文，感覺身上的魔力湧現了",12)
 				
 				};

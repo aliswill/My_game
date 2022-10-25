@@ -48,7 +48,7 @@ public class NPCCat implements NPCrole {
 					SpeakUtil.speak(1,"(虎斑貓被你嚇跑了)");
 				}
 			}
-		}else if(this.feed_time==3) {
+		}else if(this.feed_time==4) {
 			SpeakUtil.speak(1,"(喵~)");
 			SpeakUtil.speak(1,"(熟悉的叫聲傳來)");
 			SpeakUtil.speak(1,"(一隻虎斑貓竄了出來，用晶亮的眼睛盯著你，看起來似乎比以前要胖了些)");
