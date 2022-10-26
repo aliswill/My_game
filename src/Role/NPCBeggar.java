@@ -63,6 +63,7 @@ public class NPCBeggar implements NPCrole {
 			}
 			
 		}else if(v.equalsIgnoreCase("e")) {
+			hero.good_point_change(-1);
 			System.out.println(hero.getName()+"伸手要搶乞丐碗裡的幾個銅板");
 			
 			SpeakUtil.speak(1,"乞丐:真是世風日下啊!是你先對我不仁，休怪我了!");

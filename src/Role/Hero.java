@@ -46,6 +46,8 @@ public class Hero {
 	private boolean haveCat_yn;
 	private String cat_name;
 	private int good_point;//做好事的指數
+	private boolean in_jail;
+	private int in_jail_day;
 	
 	
 	
@@ -92,20 +94,35 @@ public class Hero {
 		this.Items = new HashMap<String,Item>();
 		this.haveCat_yn=false;
 		this.good_point=0;
+		this.in_jail = false;
+		this.in_jail_day=0;
 	}
 	
+	public int getIn_jail_day() {
+		return in_jail_day;
+	}
+	public void setIn_jail_day(int in_jail_day) {
+		this.in_jail_day = in_jail_day;
+	}
 	public void doBeforeSleep() {
 		SpeakUtil.speak(1,"距離天黑還有一點時間，想做些什麼呢?");
 		SpeakUtil.speak(2,"請選擇: W:鍛鍊 E:早點休息 R:去打個臨時工 任意鍵:出去走走，看有沒有需要幫助的人");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
 		if(v.equalsIgnoreCase("w")) {
-			SpeakUtil.speak(1,name+"汗流浹背地進行進行了鍛鍊，防禦力提升了1");
-			if(Math.random()<0.35) {
-				SpeakUtil.speak(1,"因為太過勞累，鍛鍊中不慎拉傷，體力值減少了4");
-				this.life-=4;
+			if(Math.random()<0.5) {
+				SpeakUtil.speak(1,name+"汗流浹背地進行進行了鍛鍊，防禦力提升了1");
+				def++;
+			}else {
+				SpeakUtil.speak(1,name+"汗流浹背地進行進行了鍛鍊，攻擊力提升了1");
+				atk++;
 			}
-			def++;
+			
+			if(Math.random()<0.35) {
+				SpeakUtil.speak(1,"因為太過勞累，鍛鍊中不慎拉傷，體力值減少了5");
+				this.life-=5;
+			}
+		
 		}else if(v.equalsIgnoreCase("e")) {
 			int value = Math.min(3,max_life-life);
 			SpeakUtil.speak(1,name+"舒服地打了個盹，體力恢復了"+value);
@@ -125,6 +142,18 @@ public class Hero {
 		
 	}
 	
+	public int getGood_point() {
+		return good_point;
+	}
+	public void setGood_point(int good_point) {
+		this.good_point = good_point;
+	}
+	public boolean isIn_jail() {
+		return in_jail;
+	}
+	public void setIn_jail(boolean in_jail) {
+		this.in_jail = in_jail;
+	}
 	public boolean checkMoney(int money_need) {
 		if(this.money>=money_need) {
 			return true;
@@ -305,6 +334,10 @@ public class Hero {
 	public void getMoney(int mon_money) {
 		this.money+=mon_money;
 		SpeakUtil.speak(1,this.name+"的金錢增加了"+mon_money);
+	}
+	
+	public void good_point_change(int value) {
+		this.good_point+=value;
 	}
 	
 	public void newLevelWish() {

@@ -59,19 +59,35 @@ private List<Integer> appearMap;
 	public void useStore(Hero hero,String welcome_yn) {//TODO:有BUG要修 錢不夠也可以買石頭?		
 		// TODO Auto-generated method stub			
 		if(welcome_yn.equalsIgnoreCase("Y"))  {
-			SpeakUtil.speak(1,"旅行商人:唷呵呵~好眼光，盡情挑吧~ (按對應鍵購買，或按Z離開商店)");
+			SpeakUtil.speak(1,"旅行商人:唷呵呵~好眼光，盡情挑吧~ (按對應鍵購買，或按Z離開商店。 tip:按T鍵也許可以搶劫?但不建議)");
 			SpeakUtil.speak(2,"Q:秘銀寶劍(攻擊力10)(90元) || W:古製巨劍(攻擊力14)(140元) || E:秘銀鎧甲(防禦力10)(90元) || R:獸王鎧甲(防禦力14)(140元)");
 			SpeakUtil.speak(2,"A:古怪的石頭(烏黑的石頭，不知道有什麼用?)(500元) || S:帥氣的頭巾(感覺戴了會很帥?)(50元) " );
 			Scanner sc = new Scanner(System.in);
 			String v1 = sc.next();
 			
-			while(!v1.equalsIgnoreCase("Z")&&!commodities.keySet().contains(v1)) {
+			while(!v1.equalsIgnoreCase("T")&&!v1.equalsIgnoreCase("Z")&&!commodities.keySet().contains(v1)) {
 				SpeakUtil.speak(2,"(按對應鍵購買，或按Z離開商店)");
 				v1 = sc.next();
 			}
 			
 			if(v1.equalsIgnoreCase("Z")) {
 				//離開商店
+			}else if(v1.equalsIgnoreCase("T")) {
+				hero.good_point_change(-5);
+				SpeakUtil.speak(1,hero.getName()+"搶劫了旅行商人!");
+				SpeakUtil.speak(2,hero.getName()+"要搶什麼商品?");
+				v1 = sc.next();
+				while(!commodities.keySet().contains(v1)) {
+					SpeakUtil.speak(2,hero.getName()+"沒有這個商品!要搶什麼商品?");
+					v1 = sc.next();
+				}
+				if(Math.random()<0.3) {
+					Commodity c = commodities.get(v1);
+					rob(hero, null);			
+				}else {
+					SpeakUtil.speak(1,hero.getName()+"搶劫失敗!"+hero.getName()+"被逮捕了!逮捕期間將無法自由行動");
+					hero.setIn_jail(true);
+				}
 			}else if(commodities.keySet().contains(v1)) {
 				Commodity c = commodities.get(v1);
 				buy(hero,c);
@@ -118,6 +134,33 @@ private List<Integer> appearMap;
 	
 	}
 
+	private void rob(Hero hero,Commodity commodity) {		
+			//hero.setMoney(hero.getMoney()-commodity.getPrice());
+			SpeakUtil.speak(1,hero.getName()+"搶得了"+commodity.getCom_name());
+			if(commodity.getCom_type()==1) {//攻擊類商品
+				if(hero.getWeapon_atk()<commodity.getChange_value()) {
+					hero.setWeapon_atk(commodity.getChange_value());
+					SpeakUtil.speak(1,hero.getName()+"裝備了"+commodity.getCom_name()+","+hero.getName()+"的武器攻擊力變為:"+hero.getWeapon_atk());
+				}
+			}else if(commodity.getCom_type()==2) {//防禦類商品
+				if(hero.getEqu_def()<commodity.getChange_value()) {
+					hero.setEqu_def((commodity.getChange_value()));
+					SpeakUtil.speak(1,hero.getName()+"裝備了"+commodity.getCom_name()+","+hero.getName()+"的裝備防禦力變為:"+hero.getEqu_def());
+				}
+			
+		}else if(commodity.getCom_type()==3) {
+			hero.setMoney(hero.getMoney()-commodity.getPrice());
+			SpeakUtil.speak(1,hero.getName()+"搶得了"+commodity.getCom_name());
+			hero.getNewItem(new Item("古怪的石頭"));
+			SpeakUtil.speak(1,"(真是奇怪的石頭，也許會在哪裡派上用場?)");
+		}else if(commodity.getCom_type()==4) {
+			hero.setMoney(hero.getMoney()-commodity.getPrice());
+			SpeakUtil.speak(1,hero.getName()+"搶得了"+commodity.getCom_name());
+			SpeakUtil.speak(1,hero.getName()+"戴上了"+commodity.getCom_name()+"，看起來相當帥氣");
+			}		
+	
+	}
+	
 	@Override
 	public void appear() {
 		// TODO Auto-generated method stub

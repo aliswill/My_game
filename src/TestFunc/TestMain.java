@@ -15,6 +15,7 @@ import Role.NPCCat;
 import Role.NPCGambler;
 import Role.NPCPoet;
 import Role.NPCPrincess;
+import Role.NPCTeacher;
 import Role.NPCTrader;
 import Role.NPCTraveler;
 import Role.NPCrole;
@@ -38,16 +39,7 @@ public class TestMain {
 		
 		boolean seaBossBeatYN = false;
 		boolean finalBossBeatYN = false;
-//		//測試咒語部分 隨機產生字串
-//		byte[] b_arr = {'a','b','c','d','e','f','g'};//new byte[20];
-//		System.out.println(b_arr);
-////		Random r = new Random();
-////		r.nextBytes(b_arr);
-//		String s = new String(b_arr,StandardCharsets.UTF_8);
-//		System.out.println(s);
-//		//System.out.println(Arrays.toString(byteArr));
-//		//System.out.println(Arrays.asList(b_arr.toString()));
-//		
+
 		int day=1;
 		
 		// TODO Auto-generated method stub
@@ -66,126 +58,113 @@ public class TestMain {
 		NPCrole traveler = new NPCTraveler(hero, maputil);
 		NPCPrincess princess = new NPCPrincess(hero);
 		NPCCat cat = new NPCCat(hero);
+		NPCTeacher teacher = new NPCTeacher(hero);
 		
 		storyutil.sayStart(day);
 		maputil.reLocateHero(hero);
 		maputil.getMapNPC(hero, traveler);
-		while(day<100) {
-//	測試用	int i=0;
-//			List<Integer> a = new ArrayList<Integer>();
-//			//int[] b = new int[100];
-//			Map<Integer,Integer> c = new HashMap<Integer,Integer>();
-//			for(int j=0;j<12;j++) {
-//				c.put(j, 0);
-//			}
-//			while(i<1000) {
-//				MyMap cur_map = maputil.getCurrentMap(hero);
-//				int map_event_num = cur_map.getEvent_num();
-//				double v = Math.random()*100;
-//				int event_index = (int)(v/(100/map_event_num));
-//				if(event_index==map_event_num) {//為何會超過呢?
-//					event_index--;
-//				}
-//				c.put(event_index, c.get(event_index)+1);
-//				//b[i] = event_index;
-//				
-//				//System.out.print(event_index+" ");
-//				//EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);
-//			i++;
-//			}
-//			//Arrays.sort(b);
-//			//System.out.println(Arrays.toString(b));
-//			System.out.println(c.toString());
-////			int year = day/12;
-////			int month=day%12;
+		while(day<30) {
 			
+			
+		
 			SpeakUtil.speak(1,"---   Day "+day+"   ---");
 			storyutil.sayNews(day, hero);
 	
-			if(maputil.getCurrentMap(hero).getId()==1&&day!=1) {				
-				StoreUtil storeutil = new StoreUtil();
-				String welcome_yn = storeutil.welcomStore();
-				storeutil.useStore(hero, welcome_yn);				
-			}
-			
-			hero.move(maputil);
-			maputil.getIntoNewMap(hero);
-			
-			maputil.getMapNPC(hero, trader);
-			maputil.getMapNPC(hero, poet);
-			maputil.getMapNPC(hero, beggar);
-			maputil.getMapNPC(hero, gambler);
-			maputil.getMapNPC(hero, traveler);
-			maputil.getMapNPC(hero, cat);
-			princess.appear(day,maputil);
-			
-			if(day>=11&&maputil.getCurrentMap(hero).getId()==6&&!seaBossBeatYN) {//海怪boss
-				Monster seaBoss = new BossSeaBeast();
-				SpeakUtil.speak(1,name+"遭遇了等級"+seaBoss.getMonster_level()+"的"+seaBoss.getName()+"!");
-				SpeakUtil.speak(1,seaBoss.toString());
-				if(hero.failToEscape()) {
-					FightUtil fightutil= new FightUtil();
-					fightutil.fight(hero, seaBoss);
-					if(!hero.isAlive_yn()||hero.getLife()<=0) {
-						SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-						break;
-					}else {
-						seaBossBeatYN=true;
-					}
+			if(hero.isIn_jail()&&hero.getIn_jail_day()<=3) {
+				
+				SpeakUtil.speak(1,hero.getName()+"在牢獄中，無法行動");
+				hero.setIn_jail_day(hero.getIn_jail_day()+1);
+				
+			}else{
+				hero.setIn_jail_day(0);
+
+				if(maputil.getCurrentMap(hero).getId()==1&&day!=1) {				
+					StoreUtil storeutil = new StoreUtil();
+					String welcome_yn = storeutil.welcomStore();
+					storeutil.useStore(hero, welcome_yn);				
 				}
-			}
-			
-			if(maputil.getCurrentMap(hero).getId()==9&&!finalBossBeatYN) {//海怪boss
-				Monster boss = new FinalBoss();
-				SpeakUtil.speak(1,name+"遭遇了等級"+boss.getMonster_level()+"的"+boss.getName()+"!");
-				SpeakUtil.speak(1,boss.toString());
-				if(hero.failToEscape()) {
-					FightUtil fightutil= new FightUtil();
-					fightutil.fight(hero, boss);
-					if(!hero.isAlive_yn()||hero.getLife()<=0) {
-						SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-						break;
-					}else {
-						finalBossBeatYN=true;
-					}
-				}
-			}
-			
-			if(maputil.MonsterHappenedYn()) {
-				Monster monster = maputil.getMapMonster(hero);
-				SpeakUtil.speak(1,name+"遭遇了等級"+monster.getMonster_level()+"的"+monster.getName()+"!");
-				SpeakUtil.speak(1,monster.toString());
-				if(hero.failToEscape()) {
-					FightUtil fightutil= new FightUtil();
-					fightutil.fight(hero, monster);
-					if(!hero.isAlive_yn()||hero.getLife()<=0) {
-						SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-						break;
+				
+				hero.move(maputil);
+				maputil.getIntoNewMap(hero);
+				
+				maputil.getMapNPC(hero, trader);
+				maputil.getMapNPC(hero, poet);
+				maputil.getMapNPC(hero, beggar);
+				maputil.getMapNPC(hero, gambler);
+				maputil.getMapNPC(hero, traveler);
+				maputil.getMapNPC(hero, cat);
+				maputil.getMapNPC(hero, teacher);
+				princess.appear(day,maputil);
+				
+				if(day>=11&&maputil.getCurrentMap(hero).getId()==6&&!seaBossBeatYN) {//海怪boss
+					Monster seaBoss = new BossSeaBeast();
+					SpeakUtil.speak(1,name+"遭遇了等級"+seaBoss.getMonster_level()+"的"+seaBoss.getName()+"!");
+					SpeakUtil.speak(1,seaBoss.toString());
+					if(hero.failToEscape()) {
+						FightUtil fightutil= new FightUtil();
+						fightutil.fight(hero, seaBoss);
+						if(!hero.isAlive_yn()||hero.getLife()<=0) {
+							SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+							break;
+						}else {
+							seaBossBeatYN=true;
+						}
 					}
 				}
 				
-			}else {
+				if(maputil.getCurrentMap(hero).getId()==9&&!finalBossBeatYN) {//海怪boss
+					Monster boss = new FinalBoss();
+					SpeakUtil.speak(1,name+"遭遇了等級"+boss.getMonster_level()+"的"+boss.getName()+"!");
+					SpeakUtil.speak(1,boss.toString());
+					if(hero.failToEscape()) {
+						FightUtil fightutil= new FightUtil();
+						fightutil.fight(hero, boss);
+						if(!hero.isAlive_yn()||hero.getLife()<=0) {
+							SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+							break;
+						}else {
+							finalBossBeatYN=true;
+						}
+					}
+				}
 				
-				SpeakUtil.speak(1,"今天沒有遭遇怪物。");
-			}
-			
-			maputil.getMapEvent(hero);
-			if(!hero.isAlive_yn()||hero.getLife()<=0) {
-				SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-				break;
-			}
-			
-			hero.doBeforeSleep();
-			if(!hero.isAlive_yn()||hero.getLife()<=0) {
-				SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-				break;
-			}
-			
-			if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
-				StoreUtil storeutil = new StoreUtil();
-				storeutil.useHotel(hero);
+				if(maputil.MonsterHappenedYn()) {
+					Monster monster = maputil.getMapMonster(hero);
+					SpeakUtil.speak(1,name+"遭遇了等級"+monster.getMonster_level()+"的"+monster.getName()+"!");
+					SpeakUtil.speak(1,monster.toString());
+					if(hero.failToEscape()) {
+						FightUtil fightutil= new FightUtil();
+						fightutil.fight(hero, monster);
+						if(!hero.isAlive_yn()||hero.getLife()<=0) {
+							SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+							break;
+						}
+					}
+					
+				}else {
+					
+					SpeakUtil.speak(1,"今天沒有遭遇怪物。");
+				}
 				
+				maputil.getMapEvent(hero);
+				if(!hero.isAlive_yn()||hero.getLife()<=0) {
+					SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+					break;
+				}
+				
+				hero.doBeforeSleep();
+				if(!hero.isAlive_yn()||hero.getLife()<=0) {
+					SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+					break;
+				}
+				
+				if(maputil.getCurrentMap(hero).getMap_name().equals("平凡的小鎮")) {
+					StoreUtil storeutil = new StoreUtil();
+					storeutil.useHotel(hero);
+					
+				}
 			}
+			
 			
 			storyutil.sayKey(hero);
 			

@@ -41,6 +41,8 @@ public class NPCTraveler implements NPCrole{
 			SpeakUtil.speak(1,hero.getName()+":你怎麼搞的這麼狼狽啊~沒實力還是別出來冒險吧哈哈");
 			
 			SpeakUtil.speak(1,"狼狽不堪的旅行者瞪了一眼"+hero.getName()+"並踱著緩步走了");
+			
+			hero.good_point_change(-1);
 		}else if(v.equalsIgnoreCase("e")) {
 			SpeakUtil.speak(1,"狼狽不堪的旅行者：謝謝你啊~你也是旅行者吧?");
 			

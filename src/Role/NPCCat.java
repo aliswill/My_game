@@ -44,8 +44,11 @@ public class NPCCat implements NPCrole {
 					SpeakUtil.speak(1,"(牠似乎吃了你給的食物，吃完後又很快地躲到一旁的草叢中消失了身影)");
 					this.feed_time++;
 	
+				}else if(v.equalsIgnoreCase("w"))  {
+					SpeakUtil.speak(1,"(虎斑貓被你嚇跑了)");
 				}else {
 					SpeakUtil.speak(1,"(虎斑貓被你嚇跑了)");
+					hero.good_point_change(-1);
 				}
 			}
 		}else if(this.feed_time==4) {
