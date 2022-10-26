@@ -119,9 +119,9 @@ public class RandomMapUtil {
 	
 	public boolean approachable(Hero hero) {
 		if(getCurrentMap(hero).getId()==9) {
-			if(hero.haveItemYN("國王的許可證")) {
+			if(hero.haveItemYN("國王的手令")) {
 				//有指定道具才能進入
-				SpeakUtil.speak(1,hero.getName()+"出示了國王的許可證，守衛便打開了門");
+				SpeakUtil.speak(1,hero.getName()+"出示了國王的手令，守衛便打開了門");
 				return true;
 			}else {
 				SpeakUtil.speak(1,"前方被重重高牆圍起，戒備森嚴，似乎是無法進入的地區?");
@@ -150,6 +150,9 @@ public class RandomMapUtil {
 			int map_event_num = cur_map.getEvent_num();
 			double v = Math.random()*100;
 			int event_index = (int)(v/(100/map_event_num));
+			if(event_index==map_event_num) {//為何會超過呢?
+				event_index--;
+			}
 			EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);//TODO:會有例外?
 			SpeakUtil.speak(1,hero.getName()+eventComUtil.getEvent_describe());
 			hero.getEventEffect(eventComUtil.getGood_or_bad_type(),(int)(eventComUtil.getOrigin_value()*cur_map.getEffect_param()),eventComUtil.getEvent_type());//好事壞事/影響值/事件類型

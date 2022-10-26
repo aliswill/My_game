@@ -7,8 +7,8 @@ public class MagicFairy extends Monster {
 		this.monster_name="惡作劇的妖精";
 		this.alive_yn=true;
 		this.life = 18;
-		this.atk = 9;
-		this.def = 3;
+		this.atk = 11;
+		this.def = 4;
 		this.dex = 20;
 		this.exp = 7;
 		this.crit = 0.03;

@@ -3,7 +3,9 @@ package TestFunc;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,12 +18,14 @@ import Role.NPCPrincess;
 import Role.NPCTrader;
 import Role.NPCTraveler;
 import Role.NPCrole;
+import Utils.EventComUtil;
 import Utils.FightUtil;
 import Utils.RandomMapUtil;
 import Utils.SpeakUtil;
 import Utils.StoreUtil;
 import Utils.StoryUtil;
 import Utils.WaitUtil;
+import map.MyMap;
 import monsters.BossSeaBeast;
 import monsters.FinalBoss;
 import monsters.FunnySnake;
@@ -30,7 +34,6 @@ import monsters.Monster;
 public class TestMain {
 
 	public static void main(String[] args) {
-		
 		
 		
 		boolean seaBossBeatYN = false;
@@ -67,10 +70,34 @@ public class TestMain {
 		storyutil.sayStart(day);
 		maputil.reLocateHero(hero);
 		maputil.getMapNPC(hero, traveler);
-		while(day<=25) {
-			
-//			int year = day/12;
-//			int month=day%12;
+		while(day<100) {
+//	測試用	int i=0;
+//			List<Integer> a = new ArrayList<Integer>();
+//			//int[] b = new int[100];
+//			Map<Integer,Integer> c = new HashMap<Integer,Integer>();
+//			for(int j=0;j<12;j++) {
+//				c.put(j, 0);
+//			}
+//			while(i<1000) {
+//				MyMap cur_map = maputil.getCurrentMap(hero);
+//				int map_event_num = cur_map.getEvent_num();
+//				double v = Math.random()*100;
+//				int event_index = (int)(v/(100/map_event_num));
+//				if(event_index==map_event_num) {//為何會超過呢?
+//					event_index--;
+//				}
+//				c.put(event_index, c.get(event_index)+1);
+//				//b[i] = event_index;
+//				
+//				//System.out.print(event_index+" ");
+//				//EventComUtil eventComUtil = cur_map.getEventComUtil(event_index);
+//			i++;
+//			}
+//			//Arrays.sort(b);
+//			//System.out.println(Arrays.toString(b));
+//			System.out.println(c.toString());
+////			int year = day/12;
+////			int month=day%12;
 			
 			SpeakUtil.speak(1,"---   Day "+day+"   ---");
 			storyutil.sayNews(day, hero);
@@ -143,6 +170,12 @@ public class TestMain {
 			}
 			
 			maputil.getMapEvent(hero);
+			if(!hero.isAlive_yn()||hero.getLife()<=0) {
+				SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
+				break;
+			}
+			
+			hero.doBeforeSleep();
 			if(!hero.isAlive_yn()||hero.getLife()<=0) {
 				SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
 				break;

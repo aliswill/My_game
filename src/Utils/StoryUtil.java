@@ -190,7 +190,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"勇者(富豪)結局達成!");
 				return true;
 			}
-		}else if(day>=25) {
+		}else if(day>=30) {
 			SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 			SpeakUtil.speak(1,"(見識了許各種各樣的地方，也遭遇了許多危險)");
 			SpeakUtil.speak(1,"(漸漸地，認識"+hero.getName()+"的人也愈來愈多)");

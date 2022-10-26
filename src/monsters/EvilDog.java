@@ -7,8 +7,8 @@ public class EvilDog extends Monster{
 		this.monster_name="兇惡的野狗";
 		this.alive_yn=true;
 		this.life = 10;
-		this.atk = 7;
-		this.def = 4;
+		this.atk = 8;
+		this.def = 7;
 		this.dex = 6;
 		this.exp = 2;
 		this.money = 2;

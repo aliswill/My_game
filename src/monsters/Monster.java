@@ -32,11 +32,11 @@ public abstract class Monster {
 		if(crit_yn==true) {
 			System.out.println(this.monster_name+"使出了憤怒一擊");
 			
-			return (int) ((this.atk)*(0.45+atk_param)*1.5);//發生了爆擊
+			return (int) ((this.atk)*(0.75+atk_param*0.5)*1.5);//發生了爆擊
 		}
 		else {
 			System.out.println(this.monster_name+"使出"+this.atk_style);
-			return (int) ((this.atk)*(0.45+atk_param));
+			return (int) ((this.atk)*(0.75+atk_param*0.5));
 		}
 	}
 	

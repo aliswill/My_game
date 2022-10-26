@@ -16,6 +16,7 @@ import Utils.FightUtil;
 import Utils.RandomMapUtil;
 import Utils.SpeakUtil;
 import Utils.WaitUtil;
+import map.MyMap;
 import monsters.Beggar;
 import monsters.Monster;
 
@@ -44,6 +45,8 @@ public class Hero {
 	private Map<String,Item> Items;
 	private boolean haveCat_yn;
 	private String cat_name;
+	private int good_point;//做好事的指數
+	
 	
 	
 //	@Override
@@ -75,12 +78,12 @@ public class Hero {
 		this.life = 50;
 		this.magic = 30;
 		this.max_magic = 30;
-		this.atk = 14;
+		this.atk = 10;
 		this.weapon_atk=0;
-		this.def = 14;
+		this.def = 8;
 		this.ats = 10;
 		this.res = 10;
-		this.dex = 14;
+		this.dex = 10;
 		this.crit = 0.15;
 		this.level=1;
 		this.exp=0;
@@ -88,9 +91,46 @@ public class Hero {
 		this.exp_needed = 5;
 		this.Items = new HashMap<String,Item>();
 		this.haveCat_yn=false;
+		this.good_point=0;
 	}
 	
+	public void doBeforeSleep() {
+		SpeakUtil.speak(1,"距離天黑還有一點時間，想做些什麼呢?");
+		SpeakUtil.speak(2,"請選擇: W:鍛鍊 E:早點休息 R:去打個臨時工 任意鍵:出去走走，看有沒有需要幫助的人");
+		Scanner sc = new Scanner(System.in);
+		String v = sc.next();
+		if(v.equalsIgnoreCase("w")) {
+			SpeakUtil.speak(1,name+"汗流浹背地進行進行了鍛鍊，防禦力提升了1");
+			if(Math.random()<0.35) {
+				SpeakUtil.speak(1,"因為太過勞累，鍛鍊中不慎拉傷，體力值減少了4");
+				this.life-=4;
+			}
+			def++;
+		}else if(v.equalsIgnoreCase("e")) {
+			int value = Math.min(3,max_life-life);
+			SpeakUtil.speak(1,name+"舒服地打了個盹，體力恢復了"+value);
+			this.life+=value;
+		}else if(v.equalsIgnoreCase("r")) {
+			SpeakUtil.speak(1,name+"去幫忙做了點體力活，賺了"+3+"元");
+			this.moneyChange(3);
+		}else {
+			if(Math.random()<0.7) {
+				SpeakUtil.speak(1,name+"熱心地幫助了困擾的路人");
+				this.good_point++;
+			}else {
+				SpeakUtil.speak(1,"今天沒有發現需要幫助的人");
+			}
+			
+		}
+		
+	}
 	
+	public boolean checkMoney(int money_need) {
+		if(this.money>=money_need) {
+			return true;
+		}
+		return false;
+	}
 	
 	public void getEventEffect(int good_or_bad,int value,int event_type) {
 		int final_value = (good_or_bad*value);		
@@ -346,10 +386,10 @@ public class Hero {
 		boolean crit_yn = Math.random()>1-this.crit;
 		if(crit_yn==true) {
 			SpeakUtil.speak(1,this.name+"使出了憤怒一擊!");
-			return (int) ((this.atk+weapon_atk)*(0.5+Math.random())*1.5);//發生了爆擊
+			return (int) ((this.atk+weapon_atk)*(0.75+Math.random()*0.5)*1.5);//發生了爆擊
 		}
 		else {
-			return (int) ((this.atk+this.weapon_atk)*(0.5+Math.random()));
+			return (int) ((this.atk+this.weapon_atk)*(0.75+Math.random()*0.5));
 		}
 	}
 	
@@ -384,7 +424,8 @@ public class Hero {
 		
 		if(this.life<=0) {			
 			this.alive_yn=false;
-			SpeakUtil.speak(1,this.name+"受到了"+damage+"點傷害，並且無力的倒下了。勝敗乃兵家常事，請再接再厲!");
+			SpeakUtil.speak(1,this.name+"受到了"+damage+"點傷害，並且無力的倒下了。");
+			SpeakUtil.speak(1,"勝敗乃兵家常事，請再接再厲!");
 			return damage;
 		}
 		SpeakUtil.speak(1,this.name+"受到了"+damage+"點傷害  (剩餘血量"+this.life+")");
