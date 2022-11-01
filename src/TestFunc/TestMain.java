@@ -28,7 +28,6 @@ import Utils.StoryUtil;
 import Utils.WaitUtil;
 import map.MyMap;
 import monsters.BossSeaBeast;
-import monsters.FinalBoss;
 import monsters.FunnySnake;
 import monsters.Monster;
 
@@ -112,21 +111,7 @@ public class TestMain {
 					}
 				}
 				
-				if(maputil.getCurrentMap(hero).getId()==9&&!finalBossBeatYN) {//海怪boss
-					Monster boss = new FinalBoss();
-					SpeakUtil.speak(1,name+"遭遇了等級"+boss.getMonster_level()+"的"+boss.getName()+"!");
-					SpeakUtil.speak(1,boss.toString());
-					if(hero.failToEscape()) {
-						FightUtil fightutil= new FightUtil();
-						fightutil.fight(hero, boss);
-						if(!hero.isAlive_yn()||hero.getLife()<=0) {
-							SpeakUtil.speak(1,"遊戲結束!請下次再挑戰");
-							break;
-						}else {
-							finalBossBeatYN=true;
-						}
-					}
-				}
+			
 				
 				if(maputil.MonsterHappenedYn()) {
 					Monster monster = maputil.getMapMonster(hero);
