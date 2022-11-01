@@ -80,12 +80,12 @@ public class Hero {
 		this.life = 50;
 		this.magic = 30;
 		this.max_magic = 30;
-		this.atk = 100;
+		this.atk = 10;
 		this.weapon_atk=0;
-		this.def = 80;
+		this.def = 10;
 		this.ats = 10;
 		this.res = 10;
-		this.dex = 100;
+		this.dex = 10;
 		this.crit = 0.15;
 		this.level=1;
 		this.exp=0;
@@ -96,6 +96,31 @@ public class Hero {
 		this.good_point=0;
 		this.in_jail = false;
 		this.in_jail_day=0;
+	}
+	
+	public void setStrongLevel(String chellange_level) {//初始強度與資源
+		if(chellange_level.equalsIgnoreCase("w")) {
+			this.atk=14;
+			this.def=14;
+			this.dex=14;
+			this.money=20;
+			this.max_life = 60;
+			this.life = 60;
+		}else if(chellange_level.equalsIgnoreCase("e")) {
+			this.atk=11;
+			this.def=11;
+			this.dex=11;
+			this.money=10;
+			this.max_life = 50;
+			this.life = 50;
+		}else {
+			this.atk=9;
+			this.def=9;
+			this.dex=9;
+			this.money=0;
+			this.max_life = 40;
+			this.life = 40;
+		}
 	}
 	
 	public int getIn_jail_day() {

@@ -12,7 +12,7 @@ public class RoyalForbiddenArea extends MyMap {
 		this.id=9;
 		this.map_level = 16;
 		this.map_name = "皇家的封禁地";
-		//this.monsters = new Monster[]{new MagicFairy()};//待補
+		this.monsters = new Monster[]{};//待補
 		this.effect_param = 1;//此地圖事件影響的倍率加乘
 		this.view_time=0;
 		

@@ -45,7 +45,11 @@ public class TestMain {
 		SpeakUtil.speak(2,"遊戲開始，請輸入你的英雄名：");		
 		Scanner scanner = new Scanner(System.in);
 		String name = scanner.next();
-		Hero hero = new Hero(name);			
+		Hero hero = new Hero(name);	
+		SpeakUtil.speak(2,"請選擇您想要的難度: w:簡單 e:普通 任意鍵:困難 ");	
+		String chellange_level = scanner.next();
+		hero.setStrongLevel(chellange_level);
+		
 		StoryUtil storyutil = new StoryUtil();
 		RandomMapUtil maputil = new RandomMapUtil();
 		maputil.makeMap();		

@@ -192,6 +192,7 @@ public class RandomMapUtil {
 	public void getIntoNewMap(Hero hero){
 		MyMap cur_map = my_map[hero.getX_index()][hero.getY_index()];
 		cur_map.addViewTime();
+		cur_map.rebuild();
 		SpeakUtil.speak(1,hero.getName()+"來到了"+cur_map.getMap_name());
 		if(cur_map.getId()==9) {
 			StoryUtil storyutil = new StoryUtil();
