@@ -35,7 +35,7 @@ public class NPCTeacher implements NPCrole{
 		if(v.equalsIgnoreCase("w")) {
 			SpeakUtil.speak(1,"(歡迎光臨勇者訓練班，最強師資將你訓練成所向無敵的勇者)");
 			SpeakUtil.speak(1,"(想要報名嗎? 武術訓練班:15元/堂 防衛訓練班:15元/堂 靈巧訓練班:15元/堂)");
-			SpeakUtil.speak(1,"(W:武術訓練班 E:防衛訓練班 R:靈巧訓練班 T:撕毀傳單 任意鍵:不想報名)");
+			SpeakUtil.speak(2,"(W:武術訓練班 E:防衛訓練班 R:靈巧訓練班 T:撕毀傳單 任意鍵:不想報名)");
 			v = sc.next();
 			if(v.equalsIgnoreCase("w")) {
 				if(hero.checkMoney(15)) {
