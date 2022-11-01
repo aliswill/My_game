@@ -80,12 +80,12 @@ public class Hero {
 		this.life = 50;
 		this.magic = 30;
 		this.max_magic = 30;
-		this.atk = 10;
+		this.atk = 100;
 		this.weapon_atk=0;
-		this.def = 8;
+		this.def = 80;
 		this.ats = 10;
 		this.res = 10;
-		this.dex = 10;
+		this.dex = 100;
 		this.crit = 0.15;
 		this.level=1;
 		this.exp=0;
@@ -217,6 +217,7 @@ public class Hero {
 				this.def+=final_value;
 				this.dex+=final_value;
 				this.max_life-=(final_value*4);
+				this.good_point-=2;
 				if(this.life>this.max_life) {
 					this.life=this.max_life;
 				}
@@ -292,7 +293,7 @@ public class Hero {
 		}
 		
 		if(direction.equalsIgnoreCase("w")) { //文字要用equals!		
-			SpeakUtil.speak(1,this.name+"向北移動了一格");
+			SpeakUtil.speak(1,this.name+"向北走了一天");
 			y_index--;
 			if(!maputil.approachable(this)) {
 				y_index++;
@@ -300,21 +301,21 @@ public class Hero {
 			
 			}
 		else if(direction.equalsIgnoreCase("d")) {
-			SpeakUtil.speak(1,this.name+"向東移動了一格");
+			SpeakUtil.speak(1,this.name+"向東走了一天");
 			x_index++;
 			if(!maputil.approachable(this)) {
 				x_index--;
 			}
 			}
 		else if(direction.equalsIgnoreCase("s")) {
-			SpeakUtil.speak(1,this.name+"向南移動了一格");
+			SpeakUtil.speak(1,this.name+"向南走了一天");
 			y_index++;
 			if(!maputil.approachable(this)) {
 				y_index--;
 			}
 			}
 		else if(direction.equalsIgnoreCase("a")) {
-			SpeakUtil.speak(1,this.name+"向西移動了一格");
+			SpeakUtil.speak(1,this.name+"向西走了一天");
 			x_index--;
 			if(!maputil.approachable(this)) {
 				x_index++;
@@ -342,7 +343,7 @@ public class Hero {
 	
 	public void newLevelWish() {
 		SpeakUtil.speak(1,name+"等級提升，受到冒險之神的眷顧，可以許一個願望，請選擇：");
-		SpeakUtil.speak(2,"Q:生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
+		SpeakUtil.speak(2,"Q:最大生命值提升5，生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
 		SpeakUtil.speak(2,"W:提升攻擊力、防禦力、敏捷力各3點");
 		SpeakUtil.speak(2,"E:提升隨機能力值10點(最大生命值/最大魔法值/攻擊/防禦/敏捷/爆擊)");
 		Scanner sc = new Scanner(System.in);
@@ -352,6 +353,7 @@ public class Hero {
 			v = sc.next();
 		}
 		if(v.equalsIgnoreCase("Q")) {
+			this.max_life+=5;
 			this.life=this.max_life;
 			this.magic=this.max_magic;
 			this.atk+=1;
@@ -452,7 +454,7 @@ public class Hero {
 	}
 	
 	public int hurt(int monster_atk) {
-		int damage = Math.max(monster_atk-this.def,0);
+		int damage = Math.max(monster_atk-(this.def+this.equ_def),0);
 		this.life = this.life-damage;
 		
 		if(this.life<=0) {			

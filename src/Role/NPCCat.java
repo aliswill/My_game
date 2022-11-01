@@ -59,7 +59,7 @@ public class NPCCat implements NPCrole {
 			SpeakUtil.speak(2,"請輸入 W:帶牠一起走 任意鍵:不帶牠走");
 			Scanner sc = new Scanner(System.in);
 			String v = sc.next();
-			if(v.equalsIgnoreCase("e")) {
+			if(v.equalsIgnoreCase("W")) {
 				SpeakUtil.speak(1,"(喵~虎斑貓看起來很高興地樣子)");
 				SpeakUtil.speak(1,"("+hero.getName()+"成功收養了虎斑貓!)");
 				SpeakUtil.speak(2,"幫虎斑貓取個名子吧? 請輸入名子:");

@@ -60,7 +60,7 @@ public class NPCPrincess  {
 				SpeakUtil.speak(1,"("+hero.getName()+"無視了他");
 				}
 			
-		}else if(this.meet_time==1&&day>8&&day<11&&cur_map.getId()==5) {
+		}else if(this.meet_time==1&&day>10&&day<13&&cur_map.getId()==5) {
 			this.meet_time++;
 			SpeakUtil.speak(1,"(一片黃沙中，你看到一名身材嬌小的女子正在被怪物追逐)");
 			SpeakUtil.speak(1,"(女子:救命..誰能救救我!)");
@@ -99,7 +99,7 @@ public class NPCPrincess  {
 			SpeakUtil.speak(1,"("+hero.getName()+"無視了他");
 			//不幫助 甚麼都沒發生
 		}
-		}else if(this.meet_time==2&&day>14&&day<17&&cur_map.getId()==8&&this.help_time==2) {
+		}else if(this.meet_time==2&&day>16&&day<19&&cur_map.getId()==8&&this.help_time==2) {
 			this.meet_time++;
 			SpeakUtil.speak(1,"(你看到一名女子正在一處廢棄的石椅上坐著沉思)");	
 			SpeakUtil.speak(2,"請選擇: W:走過去搭話 任意鍵:無視");	
@@ -148,6 +148,7 @@ public class NPCPrincess  {
 					SpeakUtil.speak(1,"女子:這樣啊，你果然不記得我了，我是艾爾薇瑟(女子看起來有些失落)");
 					SpeakUtil.speak(1,"女子:上次就是你從沙怪手中救了我");
 					SpeakUtil.speak(1,"女子:我只是在想一些心事，不要緊的");
+					SpeakUtil.speak(1,"(女子繼續沉思，不再與你說話)");
 				}
 			}else {
 				//不理會 甚麼都沒發生

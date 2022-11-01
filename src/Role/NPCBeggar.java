@@ -48,7 +48,7 @@ public class NPCBeggar implements NPCrole {
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
 		if(v.equalsIgnoreCase("w")) {
-			int gived_money = (int)(hero.getMoney()*0.2);
+			int gived_money = (int)Math.max((hero.getMoney()*0.2),2);
 			if(gived_money>0) {
 				System.out.println(hero.getName()+"給了乞丐"+gived_money+"元");
 				
@@ -63,7 +63,7 @@ public class NPCBeggar implements NPCrole {
 			}
 			
 		}else if(v.equalsIgnoreCase("e")) {
-			hero.good_point_change(-1);
+			hero.good_point_change(-2);
 			System.out.println(hero.getName()+"伸手要搶乞丐碗裡的幾個銅板");
 			
 			SpeakUtil.speak(1,"乞丐:真是世風日下啊!是你先對我不仁，休怪我了!");

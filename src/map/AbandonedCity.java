@@ -16,7 +16,7 @@ public class AbandonedCity extends MyMap{
 		this.view_time=0;
 		
 		this.eventComUtil = new EventComUtil[] {
-				new EventComUtil(1,0,1,"臨時事件",0)
+				new EventComUtil(1,0,1,"在一處廢墟撿到",0)
 				};
 		this.event_num=eventComUtil.length;//事件總數
 		this.monster_num=monsters.length;

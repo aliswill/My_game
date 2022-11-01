@@ -20,6 +20,8 @@ import map.OldTomb;
 import map.RoyalForbiddenArea;
 import map.Town;
 import map.WindyDesert;
+import monsters.Beggar;
+import monsters.BossBetrayedCommand;
 import monsters.Monster;
 
 
@@ -188,8 +190,13 @@ public class RandomMapUtil {
 
 	
 	public void getIntoNewMap(Hero hero){
-		my_map[hero.getX_index()][hero.getY_index()].addViewTime();
-		SpeakUtil.speak(1,hero.getName()+"來到了"+my_map[hero.getX_index()][hero.getY_index()].getMap_name());
+		MyMap cur_map = my_map[hero.getX_index()][hero.getY_index()];
+		cur_map.addViewTime();
+		SpeakUtil.speak(1,hero.getName()+"來到了"+cur_map.getMap_name());
+		if(cur_map.getId()==9) {
+			StoryUtil storyutil = new StoryUtil();
+			storyutil.sayFinalBoss(hero);
+		}
 		
 	}
 	
