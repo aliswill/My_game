@@ -370,7 +370,7 @@ public class Hero {
 		SpeakUtil.speak(1,name+"等級提升，受到冒險之神的眷顧，可以許一個願望，請選擇：");
 		SpeakUtil.speak(2,"Q:最大生命值提升5，生命、魔法值全滿，提升攻擊力、防禦力、敏捷力各1點");
 		SpeakUtil.speak(2,"W:提升攻擊力、防禦力、敏捷力各3點");
-		SpeakUtil.speak(2,"E:提升隨機能力值10點(最大生命值/最大魔法值/攻擊/防禦/敏捷/爆擊)");
+		SpeakUtil.speak(2,"E:提升隨機能力值10點(最大生命值/攻擊/防禦/敏捷/爆擊)");
 		Scanner sc = new Scanner(System.in);
 		String v = sc.next();
 		while(!v.equalsIgnoreCase("Q")&&!v.equalsIgnoreCase("W")&&!v.equalsIgnoreCase("E")) {
@@ -390,24 +390,21 @@ public class Hero {
 			this.dex+=3;
 		}else {
 			double son = Math.random()*100;
-			double mom = 100/6;
+			double mom = 100/5;
 			switch((int)(son/mom)) {
 				case 0:
 					this.max_life+=10;
 					break;
 				case 1:
-					this.max_magic+=10;
-					break;
-				case 2:
 					this.atk+=10;
 					break;
-				case 3:
+				case 2:
 					this.def+=10;
 					break;
-				case 4:
+				case 3:
 					this.dex+=10;
 					break;
-				case 5:
+				case 4:
 					if(this.crit<=0.9) {
 						this.crit+=0.1;
 						break;
