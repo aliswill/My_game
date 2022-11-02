@@ -133,7 +133,7 @@ public class StoryUtil {
 			SpeakUtil.speak(1,"(這位新君主野心勃勃，不難看出其想向外征服的決心)");
 			SpeakUtil.speak(1,"(國富民強雖是好事，但人民身上的賦稅與勞役也愈發沉重，可每每有反對聲音出現，又會被迅速地消除，漸漸地，人們都開始害怕這位新王)");
 			SpeakUtil.speak(1,"(而"+hero.getName()+"，至今也未敢將那夜的所見所聞告訴別人，只是繼續他的冒險生活，但夜裡，偶爾會對那夜逃跑的自己羞愧不已");
-			SpeakUtil.speak(1,"這樣的自己，又怎配成為勇者呢?怎麼向天上的父親交代...("+hero.getName()+"喃喃自語道");
+			SpeakUtil.speak(1,"這樣的自己，又怎配成為勇者呢?怎麼向天上的父親交代...("+hero.getName()+"喃喃自語道)");
 			SpeakUtil.speak(1,"若能再來一次，真希望自己會有不一樣的選擇");
 			SpeakUtil.speak(1,"*****遊戲結束*****");
 			SpeakUtil.speak(1,"怯懦的戰士結局達成!");
@@ -169,9 +169,9 @@ public class StoryUtil {
 					SpeakUtil.speak(1,"國王:不過人有多大能力，便要承擔多大責任，希望你謹記，"+hero.getName());
 					SpeakUtil.speak(1,"(次月五日，國王在交待了一應事項後，於大殿舉行了隆重的傳位典禮)");
 					SpeakUtil.speak(1,"國王:"+hero.getName()+"，以本王之名，今日將王位傳給你，你便是我國第七位國王");
-					SpeakUtil.speak(1,"國王:"+hero.getName()+"，此權杖是王權之象徵，今日授予你");
+					SpeakUtil.speak(1,"國王:此權杖是王權之象徵，今日授予你");
 					hero.getNewItem(new Item("國王的權杖"));
-					SpeakUtil.speak(1,"國王:"+hero.getName()+"，此冠冕是王所承擔的責任，今日也授予你");
+					SpeakUtil.speak(1,"國王:此冠冕是王所承擔的責任，今日也授予你");
 					hero.getNewItem(new Item("國王的冠冕"));
 					SpeakUtil.speak(1,"國王:我正式宣布，"+hero.getName()+"為我國第七位君主，日後他將引領各位前行!");
 					SpeakUtil.speak(1,"(眾人紛紛伏地，迎接新王"+hero.getName()+"的到來)");
@@ -218,7 +218,7 @@ public class StoryUtil {
 					SpeakUtil.speak(1,"國王:雖然對方不如你立下如此大的功勞，但也是位俊傑青年");
 					SpeakUtil.speak(1,"國王:最重要還是公主喜歡..這棒打鴛鴦的事情本王也是做不來呀");
 					SpeakUtil.speak(1,"國王:這樣吧，"+hero.getName()+"，本王賜予你一塊封地與勇者的稱號，日後你亦可享盡榮華與富貴");
-					SpeakUtil.speak(1,"國王:日後你一定可娶到其他相當優秀的女子，與她白頭偕老");
+					SpeakUtil.speak(1,"國王:日後你一定可娶到其他優秀的女子，與她白頭偕老");
 					SpeakUtil.speak(1,"("+hero.getName()+"得到了國王賞賜的一塊封地，並以勇者之名享譽各地)");
 					SpeakUtil.speak(1,"("+hero.getName()+"勇者的英勇事蹟，處處為人稱道，連孩子們都爭著說將來也想成為像"+hero.getName()+"一樣帥氣的勇者)");
 					SpeakUtil.speak(1,"****"+hero.getName()+"成為舉國之名的勇者，並擁有自己的封地，一輩子再不愁吃穿*****");
@@ -258,7 +258,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"鎮長結局達成!");
 				return true;
-			}else if(hero.getGood_point()>0&&hero.getLevel()>7) {//冒險家結局
+			}else if(hero.getGood_point()>0&&hero.getLevel()>=7) {//冒險家結局
 				SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 				SpeakUtil.speak(1,"(見識了許各種各樣的地方，也克服了許多危險)");
 				SpeakUtil.speak(1,"(漸漸地，認識"+hero.getName()+"的人也愈來愈多)");
@@ -270,7 +270,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"冒險家結局達成!");
 				return true;
-			}else if(hero.getGood_point()<=0&&hero.getMoney()>150&&hero.getLevel()>7) {//黑幫老大
+			}else if(hero.getGood_point()<=0&&hero.getMoney()>150&&hero.getLevel()>=7) {//黑幫老大
 				SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 				SpeakUtil.speak(1,"(不過...一切好像跟當初預料的不太一樣?)");
 				SpeakUtil.speak(1,"("+hero.getName()+"利用自己的商業頭腦與武力傳了許多不義之財)");

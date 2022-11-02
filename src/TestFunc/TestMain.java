@@ -66,7 +66,7 @@ public class TestMain {
 		storyutil.sayStart(day);
 		maputil.reLocateHero(hero);
 		maputil.getMapNPC(hero, traveler);
-		while(day<30) {
+		while(day<=30) {
 			
 			
 		
@@ -103,7 +103,7 @@ public class TestMain {
 					Monster seaBoss = new BossSeaBeast();
 					SpeakUtil.speak(1,name+"遭遇了等級"+seaBoss.getMonster_level()+"的"+seaBoss.getName()+"!");
 					SpeakUtil.speak(1,seaBoss.toString());
-					if(hero.failToEscape()) {
+					if(hero.challengeBossYN()) {
 						FightUtil fightutil= new FightUtil();
 						fightutil.fight(hero, seaBoss);
 						if(!hero.isAlive_yn()||hero.getLife()<=0) {

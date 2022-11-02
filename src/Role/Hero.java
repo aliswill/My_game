@@ -478,6 +478,18 @@ public class Hero {
 		}
 	}
 	
+	public boolean challengeBossYN() {
+		SpeakUtil.speak(2,this.name+"是否要挑戰BOSS? 請選擇: (W)是 (任意鍵):否");
+		Scanner sc = new Scanner(System.in);
+		String v = sc.next();
+		if(v.equalsIgnoreCase("w")) {
+				return true;
+			}			
+		else {			
+			return false;
+		}
+	}
+	
 	public int hurt(int monster_atk) {
 		int damage = Math.max(monster_atk-(this.def+this.equ_def),0);
 		this.life = this.life-damage;
