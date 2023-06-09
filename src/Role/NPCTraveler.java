@@ -11,6 +11,7 @@ import map.CultCamp;
 import map.Hill;
 import map.MyMap;
 import map.OldTomb;
+import map.Town;
 import map.WindyDesert;
 
 public class NPCTraveler implements NPCrole{
@@ -21,6 +22,7 @@ public class NPCTraveler implements NPCrole{
 		this.hero=hero;
 		this.maputil=maputil;
 		appearMap = new ArrayList<Integer>();
+		appearMap.add(new Town().getId());
 		appearMap.add(new Hill().getId());
 		appearMap.add(new OldTomb().getId());
 	}

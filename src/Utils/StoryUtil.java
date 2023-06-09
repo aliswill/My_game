@@ -258,7 +258,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"鎮長結局達成!");
 				return true;
-			}else if(hero.getGood_point()>0&&hero.getLevel()>=7) {//冒險家結局
+			}else if(hero.getGood_point()>=0&&hero.getLevel()>=7) {//冒險家結局
 				SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 				SpeakUtil.speak(1,"(見識了許各種各樣的地方，也克服了許多危險)");
 				SpeakUtil.speak(1,"(漸漸地，認識"+hero.getName()+"的人也愈來愈多)");
@@ -270,7 +270,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"冒險家結局達成!");
 				return true;
-			}else if(hero.getGood_point()<=0&&hero.getMoney()>150&&hero.getLevel()>=7) {//黑幫老大
+			}else if(hero.getGood_point()<0&&hero.getMoney()>150&&hero.getLevel()>=7) {//黑幫老大
 				SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 				SpeakUtil.speak(1,"(不過...一切好像跟當初預料的不太一樣?)");
 				SpeakUtil.speak(1,"("+hero.getName()+"利用自己的商業頭腦與武力傳了許多不義之財)");
@@ -281,7 +281,7 @@ public class StoryUtil {
 				SpeakUtil.speak(1,"***"+hero.getName()+"成為了人人避之唯恐不及的黑幫老大!***");
 				SpeakUtil.speak(1,"*****遊戲結束*****");
 				SpeakUtil.speak(1,"黑幫老大結局達成!");
-			}else if(hero.getGood_point()<=0){
+			}else if(hero.getGood_point()<0){
 				SpeakUtil.speak(1,"("+hero.getName()+"展開冒險已經過了許久)");
 				SpeakUtil.speak(1,"(不過...一切好像跟當初預料的不太一樣?)");
 				SpeakUtil.speak(1,"("+hero.getName()+"並不喜歡與怪物拚搏的冒險生活)");

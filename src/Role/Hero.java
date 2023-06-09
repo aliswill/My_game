@@ -149,12 +149,20 @@ public class Hero {
 			}
 		
 		}else if(v.equalsIgnoreCase("e")) {
-			int value = Math.min(3,max_life-life);
-			SpeakUtil.speak(1,name+"舒服地打了個盹，體力恢復了"+value);
+			int value = (int) Math.min(max_life*0.1,max_life-life);
+			SpeakUtil.speak(1,name+"隨地打了個盹，體力恢復了"+value);
 			this.life+=value;
-		}else if(v.equalsIgnoreCase("r")) {
-			SpeakUtil.speak(1,name+"去幫忙做了點體力活，賺了"+3+"元");
-			this.moneyChange(3);
+		}else if(v.equalsIgnoreCase("r")&this.good_point>=0) {
+			if(this.atk>20) {
+				SpeakUtil.speak(1,name+"去做粗重的體力活，賺了"+6+"元");
+				this.moneyChange(6);
+			}else {
+				SpeakUtil.speak(1,name+"去做了簡單的打工，賺了"+3+"元");
+				this.moneyChange(3);
+			}
+		}else if(v.equalsIgnoreCase("r")&this.good_point<0) {
+			SpeakUtil.speak(1,name+"素行不良，被拒絕僱用");
+			
 		}else {
 			if(Math.random()<0.7) {
 				SpeakUtil.speak(1,name+"熱心地幫助了困擾的路人");

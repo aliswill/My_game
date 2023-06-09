@@ -108,7 +108,7 @@ public class NPCPrincess  {
 			if(v.equalsIgnoreCase("W")) {
 				SpeakUtil.speak(1,hero.getName()+":小姐，這裡地方很危險的，為什麼獨自坐在這裡?");
 				SpeakUtil.speak(1,"(女子抬起頭看向了你)");
-				SpeakUtil.speak(1,"女子:啊!是你!"+"hero.getName()");
+				SpeakUtil.speak(1,"女子:啊!是你!"+hero.getName());
 				SpeakUtil.speak(1,hero.getName()+":你是..");		
 				SpeakUtil.speak(2,"請選擇: Q:愛麗絲 W:貝爾蘿菈 E:艾爾薇瑟 R:羅塔汀 T:林志玲 ");	
 				v = sc.next();

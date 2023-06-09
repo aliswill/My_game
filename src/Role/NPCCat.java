@@ -28,7 +28,7 @@ public class NPCCat implements NPCrole {
 	@Override
 	public void appear() {
 		// TODO Auto-generated method stub
-		if(feed_time<=3) {
+		if(feed_time<3) {
 			SpeakUtil.speak(1,"(喵~)");
 			SpeakUtil.speak(1,"(不遠處傳來了小聲的貓叫)");
 			SpeakUtil.speak(2,"請輸入 w:前去查看 任意鍵:無視");
@@ -51,7 +51,7 @@ public class NPCCat implements NPCrole {
 					hero.good_point_change(-1);
 				}
 			}
-		}else if(this.feed_time==4) {
+		}else if(this.feed_time==3) {
 			SpeakUtil.speak(1,"(喵~)");
 			SpeakUtil.speak(1,"(熟悉的叫聲傳來)");
 			SpeakUtil.speak(1,"(一隻虎斑貓竄了出來，用晶亮的眼睛盯著你，看起來似乎比以前要胖了些)");

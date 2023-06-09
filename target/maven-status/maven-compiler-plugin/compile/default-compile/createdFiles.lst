@@ -37,6 +37,7 @@ Role\NPCPrincess.class
 Role\Hero.class
 map\Hill.class
 monsters\MagicFairy.class
+monsters\Beast.class
 monsters\Monster.class
 Role\NPCTraveler.class
 Role\NPCTrader.class
